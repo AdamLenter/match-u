@@ -6,7 +6,7 @@ function Home() {
   
   return (
     <div>
-      Click <Link to = "CreateAccount">here</Link> to create an account
+      Click <Link to = "createAccount">here</Link> to create an account
     </div>
   );
 }
