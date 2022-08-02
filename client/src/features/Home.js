@@ -9,7 +9,7 @@ function Home({ userInfo, setUserInfo }) {
     password: ""
   });
 
-  const [loginErrors, setLoginErrors] = useState([]);
+  const [loginError, setLoginError] = useState("");
 
   function updateForm(event) {
     const updatedFormData = {...formData}
@@ -30,9 +30,10 @@ function Home({ userInfo, setUserInfo }) {
           if (response.ok) {
             response.json().then((userInfo)=>{
               setUserInfo(userInfo);
+              setLoginError("")
             });
           } else {
-            response.json().then((errorData) => setLoginErrors(errorData.errors));
+            setLoginError("Username/password combination invalid. Please try again.");
           }
       })
     }
@@ -53,6 +54,7 @@ function Home({ userInfo, setUserInfo }) {
         <header className="App-header">
           <h1>Match U</h1>
         
+          {loginError ? <div className = "errorMessage">{loginError}</div> : null}
           <form onSubmit={handleLogin}>
             <label>Username: </label>
             <input value = {formData.username} name = "username" onChange = {updateForm} />
