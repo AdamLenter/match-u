@@ -7,6 +7,9 @@ Rails.application.routes.draw do
 
   get '/contacts', to: 'contacts#index'
 
+  post '/login', to: 'sessions#create'
   post '/users', to: 'users#create'
+
+  delete "/logout", to: "sessions#destroy"
  
 end
