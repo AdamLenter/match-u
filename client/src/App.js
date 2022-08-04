@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Counter } from './features/counter/Counter';
 import './App.css';
 import { Routes, Route } from "react-router-dom";
@@ -8,6 +8,16 @@ import CreateAccountScreen from './features/CreateAccountScreen';
 function App() {
 
   const [userInfo, setUserInfo] = useState({});
+
+  useEffect(()=> {
+    fetch("/me")
+    .then((r)=>r.json())
+    .then((user)=>{
+      if(user['username']) {
+        setUserInfo(user);
+        }
+    })
+  }, [])
   
   return (
     <div className="App">

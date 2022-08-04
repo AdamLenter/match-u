@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../App.css';
 import { Routes, Route, Link } from "react-router-dom";
+import NavigationMenu from './NavigationMenu';
 
 function Home({ userInfo, setUserInfo }) {
   
@@ -79,6 +80,7 @@ function Home({ userInfo, setUserInfo }) {
 else {
   return (
     <div>
+      <NavigationMenu />
       <h1>Welcome Home!</h1>
       <p onClick = {handleLogout}>logout</p>
     </div>
