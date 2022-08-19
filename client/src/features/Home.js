@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../App.css';
 import { Routes, Route, Link } from "react-router-dom";
 import NavigationMenu from './NavigationMenu';
@@ -48,6 +48,7 @@ function Home({ userInfo, setUserInfo }) {
             console.log(userInfo);
         })
     }
+
   
   if(!userInfo['username']) {
     return (

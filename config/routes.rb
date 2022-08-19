@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get '/me/', to: 'users#show'
   
   get '/contacts', to: 'contacts#index'
+  get '/items', to: 'items#index'
 
   post '/login', to: 'sessions#create'
   post '/users', to: 'users#create'
