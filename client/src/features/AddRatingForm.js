@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import '../App.css';
 
-function AddRatingForm({ userInfo, setUserInfo }) {
+function AddRatingForm({ userInfo, setUserInfo, setRatingAdded }) {
   
     const items = useSelector((state)=>state.items.items);
+    const [itemAdded, setItemAdded] = useState(false);
 
     let ratings = [];
 
@@ -66,11 +67,12 @@ function AddRatingForm({ userInfo, setUserInfo }) {
             })
 
         setFormData(blankFormData);
+        setRatingAdded(true);
         }
     }
 
     let itemsToDisplay = [...items];
-    console.log(items);
+    
 
     if(userInfo.contact && userInfo.contact.contact_ratings) {
         userInfo.contact.contact_ratings.forEach((rating)=> {
@@ -78,10 +80,10 @@ function AddRatingForm({ userInfo, setUserInfo }) {
             itemsToDisplay.splice(itemIndex, 1);
         })
     }
-    console.log(userInfo);
+    
+    if(!itemAdded) 
     return (
         <div>
-            <h1>Add a Rating</h1>
             <form onSubmit = {submitAddRatingForm}>
                 <label>Item to Rate: </label>
                 <input type = "text" name = "itemToRate" list="data" value = {formData.itemToRate} onChange = {updateItemToRate} />
@@ -93,7 +95,7 @@ function AddRatingForm({ userInfo, setUserInfo }) {
                 </datalist>
                 <br />
 
-                <label>Rating</label>
+                <label>Rating: </label>
                 <select name = "rating" value = {formData.rating} onChange={updateItemToRate}>
                     {
                     ratings.map((rating)=><option key = {rating} value = {rating}>{rating}</option>)
