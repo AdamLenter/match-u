@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux'
+import React, { useState } from 'react';
 import AddRatingForm from './AddRatingForm'
 import '../App.css';
 import { Link } from 'react-router-dom';

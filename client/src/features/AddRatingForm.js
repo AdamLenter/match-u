@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux'
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux'
 import '../App.css';
 
 function AddRatingForm({ userInfo, setUserInfo, setRatingAdded }) {
