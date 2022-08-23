@@ -58,6 +58,9 @@ function AddRatingForm({ userInfo, setUserInfo, setRatingAdded }) {
                         updatedUser.contact.contact_ratings = updatedContactRatings;
 
                         setUserInfo(updatedUser);
+
+                        setFormData(blankFormData);
+                        setRatingAdded(createdRating);
                     })
                 }
                 else {
@@ -65,9 +68,6 @@ function AddRatingForm({ userInfo, setUserInfo, setRatingAdded }) {
                     console.log("Goodbye");
                 }
             })
-
-        setFormData(blankFormData);
-        setRatingAdded(true);
         }
     }
 
