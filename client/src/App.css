@@ -30,6 +30,20 @@
   color: red;
 }
 
+table {
+  margin: auto;
+  border: black solid 1px;
+}
+
+thead {
+  background-color: lightblue;
+}
+
+td {
+  padding: 10px;
+  border-style: black solid 1px;;
+}
+
 @keyframes App-logo-float {
   0% {
     transform: translateY(0);
