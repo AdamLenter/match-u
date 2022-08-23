@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+import { useSelector } from "react-redux";
 
 export const fetchItems = createAsyncThunk('items/fetchItems', () => {
-  console.log("Fetching!")
   return fetch("/items")
   .then((r)=>r.json())
   .then((listOfItems) => listOfItems
@@ -22,7 +22,9 @@ extraReducers: {
   [fetchItems.pending](state){
   state.status = "Pending"},
   [fetchItems.fulfilled](state, action){
-  state.items.push(action.payload)}
+    if(state.items.length === 0) {
+      state.items = action.payload}
+    }
 }
 });
 export const {  } = itemsSlice.actions;

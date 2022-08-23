@@ -1,57 +1,102 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import '../App.css';
-import { fetchItems, selectAllItems } from './items/itemsSlice';
 
-function AddRatingForm() {
-
-   const items = useSelector((state)=>state.items.items);
-    
-    function submitAddRatingForm(event) {
-        event.preventDefault();
-    }
-
-    const [formData, setFormData] = useState({
-        itemId: null, 
-        itemRating: 10
-    })
-
-    if(!formData.itemId && items[0]) {
-        const updatedFormData = {...formData};
-        updatedFormData.itemId = items[0].id;
-        setFormData(updatedFormData);
-    }
-
-    function updateItemToRate(event) {
-        const updatedFormData = {...formData};
-        updatedFormData.itemId = items.find((item)=>item.category.name.concat(" - ", item.name) === event.target.value).id;
-        setFormData(updatedFormData);
-    }
+function AddRatingForm({ userInfo, setUserInfo }) {
   
+    const items = useSelector((state)=>state.items.items);
+
     let ratings = [];
+
+    const blankFormData =  {
+        itemToRate: "", 
+        rating: 10
+    };
+
+    const [formData, setFormData] = useState(blankFormData);
 
     for (let i = 1; i <= 10; i++) {
         ratings.push(i);
     }
 
+    function updateItemToRate(event) {
+        const updatedFormData = {...formData};
+        updatedFormData[event.target.name] = event.target.value;
+        setFormData(updatedFormData);
+    }
+
+    function submitAddRatingForm(event) {
+        event.preventDefault();
+
+        const itemId = items.find((item) => item.category.name.concat(" - ", item.name) === formData.itemToRate).id;
+
+        if(itemId) {
+            const ratingForDb = {
+                contact_id: userInfo.contact.id, 
+                item_id: itemId, 
+                rating: formData.rating
+            }
+
+            fetch("/contact_ratings", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(ratingForDb)
+            }) 
+            .then((response) => {
+                if (response.ok) {
+                    response.json().then((createdRating)=>{
+
+                        let updatedContactRatings = [...userInfo.contact.contact_ratings];
+
+                        updatedContactRatings.push(createdRating);
+                        
+                        const updatedUser = {...userInfo};
+
+                        updatedUser.contact.contact_ratings = updatedContactRatings;
+
+                        setUserInfo(updatedUser);
+                    })
+                }
+                else {
+                //   response.json().then((errorData) => setAddBusErrors(errorData.errors));
+                    console.log("Goodbye");
+                }
+            })
+
+        setFormData(blankFormData);
+        }
+    }
+
+    let itemsToDisplay = [...items];
+    console.log(items);
+
+    if(userInfo.contact && userInfo.contact.contact_ratings) {
+        userInfo.contact.contact_ratings.forEach((rating)=> {
+            const itemIndex = itemsToDisplay.findIndex((item)=>item.id === rating.item.id);
+            itemsToDisplay.splice(itemIndex, 1);
+        })
+    }
+    console.log(userInfo);
     return (
         <div>
             <h1>Add a Rating</h1>
             <form onSubmit = {submitAddRatingForm}>
                 <label>Item to Rate: </label>
-                <input name = "itemToRate" type="text" list="data" onChange = {updateItemToRate} />
+                <input type = "text" name = "itemToRate" list="data" value = {formData.itemToRate} onChange = {updateItemToRate} />
 
                 <datalist id="data">
-                    {items.map((item) =>
+                    {itemsToDisplay.map((item) =>
                     <option key={item.id}>{item.category.name} - {item.name}</option>
                     )}
                 </datalist>
                 <br />
 
                 <label>Rating</label>
-                <select name = "itemRating" value = {formData.itemRating}>
+                <select name = "rating" value = {formData.rating} onChange={updateItemToRate}>
                     {
-                    ratings.map((rating)=><option value = {rating}>{rating}</option>)
+                    ratings.map((rating)=><option key = {rating} value = {rating}>{rating}</option>)
                     }
                 </select>
                 <br />

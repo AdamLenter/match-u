@@ -11,16 +11,10 @@ import { useDispatch, useSelector } from 'react-redux';
 function App() {
 
   const [userInfo, setUserInfo] = useState({});
-
-  // useEffect(()=> {
-  //   fetchItems()  
-  //     }, [])
-
+  
   const dispatch = useDispatch();
 
   const items = useSelector((state)=>state.items.items);
-
-  console.log(items);
 
   useEffect(()=> {
     fetch("/me")
@@ -29,15 +23,23 @@ function App() {
       if(user['username']) {
         setUserInfo(user);
         }
+    }
+    )
+    .then(()=>{
+      if(items.length === 0) {
+        dispatch(fetchItems());
+      }
     })
-    dispatch(fetchItems());
   }, [])
 
+
+
+  
   return (
     <div className="App">
         <Routes>
           <Route path="/createAccount/" element={<CreateAccountScreen />} />
-          <Route path="/addARating" element={<AddRatingForm />} />
+          <Route path="/addARating" element={<AddRatingForm userInfo = {userInfo}  setUserInfo = {setUserInfo} />} />
           <Route path="/" element={<Home userInfo = {userInfo} setUserInfo = {setUserInfo} />} />
         </Routes>
     </div>

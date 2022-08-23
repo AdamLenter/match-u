@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../App.css';
-import { Routes, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import NavigationMenu from './NavigationMenu';
 
 function Home({ userInfo, setUserInfo }) {
@@ -40,12 +40,10 @@ function Home({ userInfo, setUserInfo }) {
     }
 
   function handleLogout() {
-    console.log("Hello");
     fetch("/logout", {
         method: "DELETE"})
         .then (()=> {
             setUserInfo({});
-            console.log(userInfo);
         })
     }
 
