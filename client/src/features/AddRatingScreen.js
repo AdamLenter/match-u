@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import AddRatingForm from './AddRatingForm'
 import '../App.css';
 import { Link } from 'react-router-dom';
+import NavigationMenu from './NavigationMenu';
 
 function AddRatingScreen({ userInfo, setUserInfo }) {
   
@@ -12,9 +13,10 @@ function AddRatingScreen({ userInfo, setUserInfo }) {
         setRatingAdded({});
     }
 
-console.log(ratingAdded);
     return (
         <div>
+            <NavigationMenu />
+            <br />
             <h1>Add a Rating</h1>
             {!ratingAdded.id ? <AddRatingForm userInfo = {userInfo} setUserInfo = {setUserInfo} setRatingAdded = {setRatingAdded} /> : (
                 <div>
