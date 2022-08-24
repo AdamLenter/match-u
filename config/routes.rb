@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :matches
   resources :contact_ratings
   resources :contacts
   # Routing logic: fallback requests for React Router.
@@ -14,6 +15,7 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   post '/users', to: 'users#create'
   post '/rating', to: 'contact_ratings#create'
+  post '/matches', to: 'matches#create'
 
   delete "/logout", to: "sessions#destroy"
  
