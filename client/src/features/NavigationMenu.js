@@ -23,10 +23,15 @@ function NavigationMenu() {
                 <NavDropdown.Item>Add a Rating</NavDropdown.Item>
               </LinkContainer>
             </NavDropdown>
-            <Nav.Link href="#deets">More deets</Nav.Link>
-            <Nav.Link eventKey={2} href="#memes">
-              Dank memes
-            </Nav.Link>
+            <NavDropdown title="Matches" id="collasible-nav-dropdown">
+              <LinkContainer to="/makeMatch">
+                <NavDropdown.Item>Make a Match</NavDropdown.Item>
+              </LinkContainer>
+              <LinkContainer to="/receiveMatch">
+                <NavDropdown.Item>Receive a Match</NavDropdown.Item>
+              </LinkContainer>
+            </NavDropdown>
+          
           </Nav>
         </Navbar.Collapse>
       </Container>
