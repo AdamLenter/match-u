@@ -48,7 +48,7 @@ function MakeMatchScreen({ userInfo }) {
                 (response.json())
                 .then((matchInfo)=> {
                     if(matchInfo.id) {
-                        setMatchCode(matchInfo)
+                        setMatchCode(matchInfo.match_code);
                     }
                     else {
                         generateMatchCode();
@@ -63,12 +63,29 @@ function MakeMatchScreen({ userInfo }) {
         })
     }
     
-    console.log(matchCode);
+    function DisplayButton() {
+        return (
+            <div>
+                <h1>Make a Match</h1>
+                <br />
+                <button onClick = {generateMatchCode}>{buttonPhrases[buttonTerm]}</button>
+            </div>
+        )
+    }
+    function DisplayMatchCode() {
+        return (
+            <div>
+                <h1>Match Code:</h1>
+                <br />
+                <h2>{matchCode}</h2>
+            </div>
+        )
+    }
+
     return (
         <div>
             <NavigationMenu />
-            <h1>Make a Match</h1>
-            <button onClick = {generateMatchCode}>{buttonPhrases[buttonTerm]}</button>
+           {!matchCode ? <DisplayButton /> : <DisplayMatchCode />}
         </div>
     );
 }
