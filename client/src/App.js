@@ -8,6 +8,7 @@ import AddRatingScreen from './features/AddRatingScreen';
 import { fetchItems } from './features/items/itemsSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import MyRatings from './features/MyRatings';
+import MakeMatchScreen from './features/MakeMatchScreen';
 
 function App() {
 
@@ -32,16 +33,14 @@ function App() {
       }
     })
   }, [])
-
-
-
   
   return (
     <div className="App">
         <Routes>
           <Route path="/createAccount/" element={<CreateAccountScreen />} />
-          <Route path="/myRatings" element={<MyRatings userInfo = {userInfo}  setUserInfo = {setUserInfo} />} />
+          <Route path="/myRatings" element={<MyRatings userInfo = {userInfo} />} />
           <Route path="/addARating" element={<AddRatingScreen userInfo = {userInfo}  setUserInfo = {setUserInfo} />} />
+          <Route path="/makeMatch" element={<MakeMatchScreen userInfo = {userInfo} />} />
           <Route path="/" element={<Home userInfo = {userInfo} setUserInfo = {setUserInfo} />} />
         </Routes>
     </div>
