@@ -39,10 +39,10 @@ thead {
   background-color: lightblue;
 }
 
-td {
+th, td {
   padding: 10px;
-  border-style: black solid 1px;;
 }
+
 
 @keyframes App-logo-float {
   0% {
