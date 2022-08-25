@@ -33,7 +33,8 @@ function MakeMatchScreen({ userInfo }) {
     function generateMatchCode() {
         const matchInfo = {
             sender_contact_id: userInfo.contact.id, 
-            match_code: generateString()
+            match_code: generateString(), 
+            match_confirmed: false
         }
         
         fetch("/matches", {

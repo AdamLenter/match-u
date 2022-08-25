@@ -3,7 +3,7 @@ import '../App.css';
 import NavigationMenu from './NavigationMenu';
 import RatingRow from './RatingRow';
 
-function MyRatings({ userInfo }) {
+function MyRatings({ userInfo, cellStyle }) {
   
     const [ratingAdded, setRatingAdded] = useState({});
     const[filterTerm, setFilterTerm] = useState("");
@@ -41,9 +41,7 @@ function MyRatings({ userInfo }) {
     }
     console.log(sortedRatings);
 
-    const cellStyle = {
-        border: '1px solid black', 
-    };
+  
     
 
  
