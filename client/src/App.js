@@ -9,6 +9,7 @@ import { fetchItems } from './features/items/itemsSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import MyRatings from './features/MyRatings';
 import MakeMatchScreen from './features/MakeMatchScreen';
+import ReceiveMatchScreen from './features/ReceiveMatchScreen';
 
 function App() {
 
@@ -41,6 +42,7 @@ function App() {
           <Route path="/myRatings" element={<MyRatings userInfo = {userInfo} />} />
           <Route path="/addARating" element={<AddRatingScreen userInfo = {userInfo}  setUserInfo = {setUserInfo} />} />
           <Route path="/makeMatch" element={<MakeMatchScreen userInfo = {userInfo} />} />
+          <Route path="/receiveMatch" element={<ReceiveMatchScreen userInfo = {userInfo} />} />
           <Route path="/" element={<Home userInfo = {userInfo} setUserInfo = {setUserInfo} />} />
         </Routes>
     </div>
