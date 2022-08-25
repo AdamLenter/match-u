@@ -11,11 +11,14 @@ Rails.application.routes.draw do
   
   get '/contacts', to: 'contacts#index'
   get '/items', to: 'items#index'
+  get '/match_code/:match_code', to: 'matches#find_by'
 
   post '/login', to: 'sessions#create'
   post '/users', to: 'users#create'
   post '/rating', to: 'contact_ratings#create'
   post '/matches', to: 'matches#create'
+
+  patch '/matches/:id', to: 'matches#update'
 
   delete "/logout", to: "sessions#destroy"
  

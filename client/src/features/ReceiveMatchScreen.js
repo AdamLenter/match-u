@@ -1,31 +1,30 @@
 import React, { useState } from 'react';
 import '../App.css';
+import ErrorMessageDiv from './ErrorMessageDiv';
 import NavigationMenu from './NavigationMenu';
-import RatingRow from './RatingRow';
+import ReceiveMatchForm from './ReceiveMatchForm';
 
 function ReceiveMatchScreen({ userInfo }) {
    
-    const [enteredMatchCode, setEnteredMatchCode] = useState("");
+    const [matchSuccessful, setMatchSuccessful] = useState(false);
 
-    function updateEnteredMatchCode(event) {
-        const updatedMatchCode = event.target.value.toUpperCase();
-        setEnteredMatchCode(updatedMatchCode);
-    } 
-
-    function findMatch(event) {
-        event.preventDefault();
-        console.log(enteredMatchCode);
+    function MatchSuccessfulMessage() {
+        return (
+            <div>
+                <h1>Match Code Successful</h1>
+                <p>
+                    <strong>
+                        Once the sender confirms the match, you will be able to see details.
+                    </strong>
+                </p>
+            </div>
+        )
     }
     return (
         <div>
             <NavigationMenu />
             <br />
-            <h1>Enter Match Code</h1>
-            <form onSubmit = {findMatch}>
-                <input name = "matchCode" value = {enteredMatchCode} onChange = {updateEnteredMatchCode} />
-                <br />
-                <button>Submit</button>
-            </form>
+            {!matchSuccessful ? <ReceiveMatchForm userInfo = {userInfo} setMatchSuccessful = {setMatchSuccessful} /> : <MatchSuccessfulMessage />}
         </div>
     );
 }
