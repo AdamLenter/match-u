@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import '../App.css';
 import NavigationMenu from './NavigationMenu';
-import RatingRow from './RatingRow';
+import { addMatch } from './matches/matchesSlice';
 
 function MakeMatchScreen({ userInfo }) {
     const [matchCode, setMatchCode] = useState("");
     const [buttonTerm, setButtonTerm] = useState();
+   
+    const matches = useSelector((state)=>state.matches.matches);
+    const dispatch = useDispatch();
 
     const buttonPhrases = [
         "Hook me up!", 
@@ -31,7 +35,7 @@ function MakeMatchScreen({ userInfo }) {
     }
 
     function generateMatchCode() {
-        const matchInfo = {
+        const matchInfoForDb = {
             sender_contact_id: userInfo.contact.id, 
             match_code: generateString(), 
             match_confirmed: false
@@ -42,7 +46,7 @@ function MakeMatchScreen({ userInfo }) {
             headers: {
             "Content-Type": "application/json"
             },
-            body: JSON.stringify(matchInfo)
+            body: JSON.stringify(matchInfoForDb)
             })
         .then((response) => {
             if (response.ok) {
@@ -50,20 +54,20 @@ function MakeMatchScreen({ userInfo }) {
                 .then((matchInfo)=> {
                     if(matchInfo.id) {
                         setMatchCode(matchInfo.match_code);
+                        dispatch(addMatch(matchInfo));
                     }
                     else {
-                        generateMatchCode();
+                        console.log("Here");
                     }
                 })
                 
             }
         else {
-            // generateMatchCode();
-            console.log("Bad");
+            generateMatchCode();
         }
         })
     }
-    
+    console.log(matches);
     function DisplayButton() {
         return (
             <div>

@@ -4,7 +4,6 @@ class MatchesController < ApplicationController
     
     def create
         match = Match.create(match_params)
-
         if(match)
             render json: match
         else

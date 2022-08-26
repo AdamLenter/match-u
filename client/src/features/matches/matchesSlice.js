@@ -16,6 +16,9 @@ name: "matches",
     error: [], 
   },
 reducers: { 
+  addMatch(state, action) {
+    state.matches.push(action.payload);
+  }
   },
 extraReducers: {
   [fetchMatches.pending](state){
@@ -26,7 +29,7 @@ extraReducers: {
     }
 }
 });
-export const {  } = matchesSlice.actions;
+export const { addMatch } = matchesSlice.actions;
 export default matchesSlice.reducer;
 
 
