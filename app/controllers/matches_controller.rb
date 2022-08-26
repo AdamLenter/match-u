@@ -33,6 +33,11 @@ class MatchesController < ApplicationController
         render json: matches, status: :ok
     end
 
+    def my_matches
+        matches = Match.where(sender_contact_id: params[:contact_id]).or(Match.where(recipient_contact_id: params[:contact_id]))
+        render json: matches, status: :ok
+    end
+
     private
 
     def match_params

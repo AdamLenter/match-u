@@ -6,6 +6,7 @@ import Home from './features/Home';
 import CreateAccountScreen from './features/CreateAccountScreen';
 import AddRatingScreen from './features/AddRatingScreen';
 import { fetchItems } from './features/items/itemsSlice';
+import { fetchMatches } from './features/matches/matchesSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import MyRatings from './features/MyRatings';
 import MakeMatchScreen from './features/MakeMatchScreen';
@@ -19,6 +20,8 @@ function App() {
   const dispatch = useDispatch();
 
   const items = useSelector((state)=>state.items.items);
+  const matches = useSelector((state)=>state.matches.matches);
+
 
   const cellStyle = {
     border: '1px solid black', 
@@ -30,6 +33,9 @@ function App() {
     .then((user)=>{
       if(user['username']) {
         setUserInfo(user);
+        if(matches.length === 0) {
+          dispatch(fetchMatches(user.contact.id));
+        }
         }
     }
     )

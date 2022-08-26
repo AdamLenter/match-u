@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import '../App.css';
 import NavigationMenu from './NavigationMenu';
 
 function PendingMatchScreen({ userInfo, cellStyle }) {
    
-    const [pendingMatches, setPendingMatches] = useState([]);
-    const [pendingMatchesFetched, setPendingMatchesFetched] = useState(false);
-
-    if(userInfo.contact && !pendingMatchesFetched) {
-        fetch(`/pending_matches/${userInfo.contact.id}`)
-          .then((r)=>r.json())
-          .then((pendingMatchList) => setPendingMatches(pendingMatchList))
-          .then(() => setPendingMatchesFetched(true))
-        }
+    const matches = useSelector((state)=>state.matches.matches);
+   
+    let pendingMatches = [];
+    
+    if(matches.length > 0 && pendingMatches.length === 0) {
+        pendingMatches = matches.filter((match)=>match.sender_contact_id === userInfo.contact.id && match.recipient_contact_id);
+    }
 
     return (
         <div>
