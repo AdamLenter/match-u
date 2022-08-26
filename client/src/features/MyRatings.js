@@ -19,7 +19,7 @@ function MyRatings({ userInfo, cellStyle }) {
 
     if(userInfo.contact && userInfo.contact.contact_ratings) {
         if(filterTerm != "") {
-            console.log(filterTerm);
+            
             filteredRatings = userInfo.contact.contact_ratings.filter((rating) => {
                 if(rating.item.name.concat(rating.item.category.name).toLowerCase().includes(filterTerm.toLowerCase())) {
                     return rating;
@@ -39,11 +39,6 @@ function MyRatings({ userInfo, cellStyle }) {
             }
         })
     }
-    console.log(sortedRatings);
-
-  
-    
-
  
     return (
         <div>

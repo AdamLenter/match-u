@@ -20,9 +20,10 @@ reducers: {
     state.matches.push(action.payload);
   },
   updateMatch(state, action) {
-    let matchToUpdate = state.matches.find((match) => match.id === action.payload.id);
-    matchToUpdate = action.payload;
-  }
+    console.log(state.matches);
+    const index = state.matches.findIndex((match) => match.id === action.payload.id);
+    state.matches[index] = action.payload;
+  },
   },
 extraReducers: {
   [fetchMatches.pending](state){

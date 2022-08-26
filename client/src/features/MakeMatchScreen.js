@@ -67,7 +67,7 @@ function MakeMatchScreen({ userInfo }) {
         }
         })
     }
-    console.log(matches);
+    
     function DisplayButton() {
         return (
             <div>

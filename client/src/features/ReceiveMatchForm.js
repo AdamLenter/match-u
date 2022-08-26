@@ -67,7 +67,6 @@ function ReceiveMatchForm({ userInfo, setMatchSuccessful }) {
             })
         }
 
-        console.log(matches);
     return (
         <div>
             <br />

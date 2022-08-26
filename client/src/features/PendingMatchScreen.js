@@ -1,47 +1,59 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import '../App.css';
 import NavigationMenu from './NavigationMenu';
+import PendingMatchRow from './PendingMatchRow';
 
 function PendingMatchScreen({ userInfo, cellStyle }) {
    
     const matches = useSelector((state)=>state.matches.matches);
-   
+    const [confirmedMatch, setConfirmedMatch] = useState({});
+  
     let pendingMatches = [];
     
     if(matches.length > 0 && pendingMatches.length === 0) {
-        pendingMatches = matches.filter((match)=>match.sender_contact_id === userInfo.contact.id && match.recipient_contact_id);
+        pendingMatches = matches.filter((match)=>match.sender_contact_id === userInfo.contact.id && match.recipient_contact_id && !match.match_confirmed);
     }
 
-    return (
-        <div>
-            <NavigationMenu />
-            <br />
-            <h1>Pending Matches</h1>
-            <table>
-                <thead>
-                    <tr>
-                        <th style = {cellStyle}>First Name</th>
-                        <th style = {cellStyle}>Last Name</th>
-                        <th style = {cellStyle}>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {pendingMatches.length > 0 ? pendingMatches.map((match)=> (
-                        <tr key = {match.id}>
-                            <td style = {cellStyle}>{match.recipient_contact.first_name}</td>
-                            <td style = {cellStyle}>{match.recipient_contact.last_name}</td>
-                            <td style = {cellStyle}><button>Confirm</button> <button>Delete</button></td>
-                        </tr>
-                    )) : (
+    if(!confirmedMatch.id ) {
+        return (
+            <div>
+                <NavigationMenu />
+                <br />
+                <h1>Pending Matches</h1>
+                <table>
+                    <thead>
                         <tr>
-                            <td colSpan = "3">No pending matches</td>
+                            <th style = {cellStyle}>First Name</th>
+                            <th style = {cellStyle}>Last Name</th>
+                            <th style = {cellStyle}>Action</th>
                         </tr>
-                    )}
-                </tbody>
-            </table>
-        </div>
-    );
+                    </thead>
+                    <tbody>
+                        {pendingMatches.length > 0 ? pendingMatches.map((match)=> <PendingMatchRow key = {match.id} cellStyle = {cellStyle} matchInfo = {match} setConfirmedMatch = {setConfirmedMatch} />) : (
+                            <tr>
+                                <td style = {cellStyle} colSpan = "3">No pending matches</td>
+                            </tr>
+                        )}
+                    </tbody>
+                </table>
+            </div>
+            );
+        } 
+    else {
+        return (
+            <div>
+                <NavigationMenu />
+                <br />
+                <h1>Congratulations!</h1>
+                <p>
+                    Your match with <strong>{confirmedMatch.recipient_contact.first_name} {confirmedMatch.recipient_contact.last_name} </strong>has been confirmed.
+                    <br />
+                    Click <strong>here</strong> to see details.
+                </p>
+            </div>
+            );
+        }
 }
 
 export default PendingMatchScreen;
