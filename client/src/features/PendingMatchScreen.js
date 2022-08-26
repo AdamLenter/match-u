@@ -29,7 +29,7 @@ function PendingMatchScreen({ userInfo, cellStyle }) {
                 </thead>
                 <tbody>
                     {pendingMatches.length > 0 ? pendingMatches.map((match)=> (
-                        <tr>
+                        <tr key = {match.id}>
                             <td style = {cellStyle}>{match.recipient_contact.first_name}</td>
                             <td style = {cellStyle}>{match.recipient_contact.last_name}</td>
                             <td style = {cellStyle}><button>Confirm</button> <button>Delete</button></td>
