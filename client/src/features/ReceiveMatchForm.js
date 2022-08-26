@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import '../App.css';
 import ErrorMessageDiv from './ErrorMessageDiv';
-import NavigationMenu from './NavigationMenu';
+import { useDispatch, useSelector } from 'react-redux';
+import { addMatch } from './matches/matchesSlice';
 
 function ReceiveMatchForm({ userInfo, setMatchSuccessful }) {
    
     const [enteredMatchCode, setEnteredMatchCode] = useState("");
     const [errorMessage, setErrorMessage]  = useState("");
+
+    const matches = useSelector((state)=>state.matches.matches);
+    const dispatch = useDispatch();
 
     function updateEnteredMatchCode(event) {
         const updatedMatchCode = event.target.value.toUpperCase();
@@ -41,7 +45,13 @@ function ReceiveMatchForm({ userInfo, setMatchSuccessful }) {
                             body: JSON.stringify({recipient_contact_id: userInfo.contact.id})
                             })
                             .then((r)=r.json())
-                            .then(()=>setMatchSuccessful(true));
+                            .then(() => {
+                                let updatedRecord = {...returnedMatch};
+                                updatedRecord.recipient_contact_id = userInfo.contact.id;
+                                updatedRecord.recipient_contact = userInfo.contact;
+                                dispatch(addMatch(updatedRecord));
+                                })
+                            .then(()=>setMatchSuccessful(true))
                         }
                     }
                 )}
@@ -52,6 +62,7 @@ function ReceiveMatchForm({ userInfo, setMatchSuccessful }) {
             })
         }
 
+        console.log(matches);
     return (
         <div>
             <br />

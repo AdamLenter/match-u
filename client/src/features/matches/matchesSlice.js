@@ -18,6 +18,10 @@ name: "matches",
 reducers: { 
   addMatch(state, action) {
     state.matches.push(action.payload);
+  },
+  updateMatch(state, action) {
+    let matchToUpdate = state.matches.find((match) => match.id === action.payload.id);
+    matchToUpdate = action.payload;
   }
   },
 extraReducers: {
@@ -29,7 +33,7 @@ extraReducers: {
     }
 }
 });
-export const { addMatch } = matchesSlice.actions;
+export const { addMatch, updateMatch } = matchesSlice.actions;
 export default matchesSlice.reducer;
 
 

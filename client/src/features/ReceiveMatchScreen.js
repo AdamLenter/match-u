@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import '../App.css';
 import ErrorMessageDiv from './ErrorMessageDiv';
+import { updateMatch } from './matches/matchesSlice';
 import NavigationMenu from './NavigationMenu';
 import ReceiveMatchForm from './ReceiveMatchForm';
 
 function ReceiveMatchScreen({ userInfo }) {
    
     const [matchSuccessful, setMatchSuccessful] = useState(false);
+
+    
 
     function MatchSuccessfulMessage() {
         return (
