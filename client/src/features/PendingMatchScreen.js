@@ -33,7 +33,11 @@ function PendingMatchScreen({ userInfo, cellStyle }) {
                             <td style = {cellStyle}>{match.recipient_contact.last_name}</td>
                             <td style = {cellStyle}><button>Confirm</button> <button>Delete</button></td>
                         </tr>
-                    )) : null}
+                    )) : (
+                        <tr>
+                            <td colSpan = "3">No pending matches</td>
+                        </tr>
+                    )}
                 </tbody>
             </table>
         </div>

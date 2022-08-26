@@ -30,6 +30,11 @@ function ReceiveMatchForm({ userInfo, setMatchSuccessful }) {
                         setErrorMessage("Invalid code. Please try again.");
                         setEnteredMatchCode("");
                     }
+                    else if(matches.find((match)=>match.sender_contact_id === returnedMatch.sender_contact_id || match.recipient_contact_id === returnedMatch.sender_contact_id)) {
+                        //These two people already exist:
+                        setErrorMessage("You are already matched with this individual. Please try again.");
+                        setEnteredMatchCode("");
+                    }
                     else if(returnedMatch.recipient_contact_id) {
                         //There is a recipient contact id. therefore, the code has been claimed.
                         setErrorMessage("The code has expired. Please try again.");
