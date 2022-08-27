@@ -27,7 +27,7 @@ function ReceiveMatchForm({ userInfo, setMatchSuccessful }) {
                 .then((returnedMatch) => {
                     if(returnedMatch.sender_contact_id === userInfo.contact.id) {
                         //Sender and recipient are the same person.
-                        setErrorMessage("Invalid code. Please try again.");
+                        setErrorMessage("You can't match yourself, silly 😂 Please try again.");
                         setEnteredMatchCode("");
                     }
                     else if(matches.find((match)=>match.sender_contact_id === returnedMatch.sender_contact_id || match.recipient_contact_id === returnedMatch.sender_contact_id)) {
