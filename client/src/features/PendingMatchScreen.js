@@ -8,6 +8,7 @@ function PendingMatchScreen({ userInfo, cellStyle }) {
    
     const matches = useSelector((state)=>state.matches.matches);
     const [confirmedMatch, setConfirmedMatch] = useState({});
+    const [deletedMatchMessage, setDeletedMatchMessage] = useState();
   
     let pendingMatches = [];
     
@@ -20,6 +21,7 @@ function PendingMatchScreen({ userInfo, cellStyle }) {
             <div>
                 <NavigationMenu />
                 <br />
+                {deletedMatchMessage ? <p>{deletedMatchMessage}<br /></p> : null}
                 <h1>Pending Matches</h1>
                 <table>
                     <thead>
@@ -30,7 +32,7 @@ function PendingMatchScreen({ userInfo, cellStyle }) {
                         </tr>
                     </thead>
                     <tbody>
-                        {pendingMatches.length > 0 ? pendingMatches.map((match)=> <PendingMatchRow key = {match.id} cellStyle = {cellStyle} matchInfo = {match} setConfirmedMatch = {setConfirmedMatch} />) : (
+                        {pendingMatches.length > 0 ? pendingMatches.map((match)=> <PendingMatchRow key = {match.id} cellStyle = {cellStyle} matchInfo = {match} setConfirmedMatch = {setConfirmedMatch} setDeletedMatchMessage = {setDeletedMatchMessage} />) : (
                             <tr>
                                 <td style = {cellStyle} colSpan = "3">No pending matches</td>
                             </tr>

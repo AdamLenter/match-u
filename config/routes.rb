@@ -23,5 +23,6 @@ Rails.application.routes.draw do
   patch '/matches/:id', to: 'matches#update'
 
   delete "/logout", to: "sessions#destroy"
+  delete "/matches/:id", to: "matches#destroy"
  
 end

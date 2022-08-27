@@ -39,6 +39,10 @@ function NavigationMenu() {
                 <NavDropdown.Item>My Pending Matches</NavDropdown.Item>
               </LinkContainer>
 
+              <LinkContainer to="/myMatches">
+                <NavDropdown.Item>My Matches</NavDropdown.Item>
+              </LinkContainer>
+
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>

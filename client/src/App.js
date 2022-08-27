@@ -12,6 +12,7 @@ import MyRatings from './features/MyRatings';
 import MakeMatchScreen from './features/MakeMatchScreen';
 import ReceiveMatchScreen from './features/ReceiveMatchScreen';
 import PendingMatchScreen from './features/PendingMatchScreen';
+import MyMatchesScreen from './features/MyMatchesScreen';
 
 function App() {
 
@@ -55,6 +56,7 @@ function App() {
           <Route path="/makeMatch" element={<MakeMatchScreen userInfo = {userInfo} />} />
           <Route path="/receiveMatch" element={<ReceiveMatchScreen userInfo = {userInfo} />} />
           <Route path="/pendingMatches" element={<PendingMatchScreen userInfo = {userInfo} cellStyle = {cellStyle} />} />
+          <Route path="/myMatches" element={<MyMatchesScreen userInfo = {userInfo} cellStyle = {cellStyle} />} />
           <Route path="/" element={<Home userInfo = {userInfo} setUserInfo = {setUserInfo} />} />
         </Routes>
     </div>

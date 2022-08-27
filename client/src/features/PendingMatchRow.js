@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import '../App.css';
-import { updateMatch } from './matches/matchesSlice';
+import { updateMatch, deleteMatch } from './matches/matchesSlice';
 import NavigationMenu from './NavigationMenu';
 
 
-function PendingMatchRow({ cellStyle, matchInfo, setConfirmedMatch }) {
+function PendingMatchRow({ cellStyle, matchInfo, setConfirmedMatch, setDeletedMatchMessage}) {
    
     const dispatch = useDispatch();
 
@@ -25,11 +25,21 @@ function PendingMatchRow({ cellStyle, matchInfo, setConfirmedMatch }) {
                 })
     }
 
+    function processDeleteMatch() {
+        fetch(`/matches/${matchInfo.id}`, {
+            method: "DELETE"})
+            .then (()=> {
+                dispatch(deleteMatch(matchInfo.id));
+                setDeletedMatchMessage("Match successfully deleted.");
+            })
+        return;
+    }
+
     return (
         <tr key = {matchInfo.id}>
             <td style = {cellStyle}>{matchInfo.recipient_contact.first_name}</td>
             <td style = {cellStyle}>{matchInfo.recipient_contact.last_name}</td>
-            <td style = {cellStyle}><button name = "confirmMatch" value = {matchInfo.id} onClick = {confirmMatch}>Confirm</button> <button>Delete</button></td>
+            <td style = {cellStyle}><button name = "confirmMatch" onClick = {confirmMatch}>Confirm</button> <button onClick = {processDeleteMatch}>Delete</button></td>
         </tr>
     );
 }

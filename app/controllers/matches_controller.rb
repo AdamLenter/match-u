@@ -27,6 +27,13 @@ class MatchesController < ApplicationController
         render json: match, status: :ok
     end
 
+    def destroy
+        match = Match.find_by!(id: params[:id])
+        match.destroy
+        head :no_content
+    end
+
+
     def pending_matches
         matches = Match.where(sender_contact_id: params[:sender_contact_id], recipient_contact_id: 1.., match_confirmed: false)
         render json: matches, status: :ok
