@@ -81,8 +81,8 @@ function ViewMatchScreen({ userInfo, match, cellStyle }) {
                 biggestDifference = Math.max(biggestDifference, absoluteValueOfDifference);
                 smallestDifference = Math.min(smallestDifference, absoluteValueOfDifference);
 
-                highestCombinedRating = Math.Max(highestCombinedRating, combinedRating);
-                lowestCombinedRating = Math.Min(lowestCombinedRating, combinedRating);
+                highestCombinedRating = Math.max(highestCombinedRating, combinedRating);
+                lowestCombinedRating = Math.min(lowestCombinedRating, combinedRating);
 
                 mutualMatches.push({
                     myRating: mySortedRatings[i], 
