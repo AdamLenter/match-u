@@ -13,6 +13,7 @@ import MakeMatchScreen from './features/MakeMatchScreen';
 import ReceiveMatchScreen from './features/ReceiveMatchScreen';
 import PendingMatchScreen from './features/PendingMatchScreen';
 import MyMatchesScreen from './features/MyMatchesScreen';
+import ViewMatchScreen from './features/ViewMatchScreen';
 
 function App() {
 
@@ -22,7 +23,7 @@ function App() {
 
   const items = useSelector((state)=>state.items.items);
   const matches = useSelector((state)=>state.matches.matches);
-
+  const [match, setMatch] = useState({});
 
   const cellStyle = {
     border: '1px solid black', 
@@ -46,7 +47,6 @@ function App() {
       }
     })
   }, [])
-  
   return (
     <div className="App">
         <Routes>
@@ -56,7 +56,8 @@ function App() {
           <Route path="/makeMatch" element={<MakeMatchScreen userInfo = {userInfo} />} />
           <Route path="/receiveMatch" element={<ReceiveMatchScreen userInfo = {userInfo} />} />
           <Route path="/pendingMatches" element={<PendingMatchScreen userInfo = {userInfo} cellStyle = {cellStyle} />} />
-          <Route path="/myMatches" element={<MyMatchesScreen userInfo = {userInfo} cellStyle = {cellStyle} />} />
+          <Route path="/myMatches" element={<MyMatchesScreen userInfo = {userInfo} setMatch = {setMatch} cellStyle = {cellStyle} />} />
+          <Route path="/viewMatch" element={<ViewMatchScreen userInfo={userInfo} match = {match} cellStyle = {cellStyle} />} />
           <Route path="/" element={<Home userInfo = {userInfo} setUserInfo = {setUserInfo} />} />
         </Routes>
     </div>

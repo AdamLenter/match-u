@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import '../App.css';
-import { updateMatch, deleteMatch } from './matches/matchesSlice';
-import NavigationMenu from './NavigationMenu';
 
-
-function MyMatchRow({ cellStyle, matchInfo, userInfo}) {
+function MyMatchRow({ cellStyle, matchInfo, setMatch, userInfo}) {
    
     let nameToDisplay = {};
 
@@ -16,14 +13,17 @@ function MyMatchRow({ cellStyle, matchInfo, userInfo}) {
         nameToDisplay = matchInfo.sender_contact;
     }
 
-    function viewMatch() {
-        console.log(nameToDisplay);
+    function handleViewMatchClick(){
+        setMatch(matchInfo);
     }
+
     return (
         <tr key = {matchInfo.id}>
             <td style = {cellStyle}>{nameToDisplay.first_name}</td>
             <td style = {cellStyle}>{nameToDisplay.last_name}</td>
-            <td style = {cellStyle}><button name = "viewMatch" onClick = {viewMatch}>VIEW</button></td>
+            <td style = {cellStyle}>
+                <Link to = "/viewMatch" onClick = {handleViewMatchClick}>View Match</Link>
+            </td>
         </tr>
     );
 }

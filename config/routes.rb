@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get '/match_code/:match_code', to: 'matches#find_by'
   get '/pending_matches/:sender_contact_id', to: 'matches#pending_matches'
   get '/my_matches/:contact_id', to: 'matches#my_matches'
+  get '/show_contact/:contact_id', to: 'contact_ratings#show_by_contact'
 
   post '/login', to: 'sessions#create'
   post '/users', to: 'users#create'

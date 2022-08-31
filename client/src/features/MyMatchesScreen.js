@@ -4,7 +4,7 @@ import '../App.css';
 import MyMatchRow from './MyMatchRow';
 import NavigationMenu from './NavigationMenu';
 
-function MyMatchesScreen({ userInfo, cellStyle }) {
+function MyMatchesScreen({ userInfo, setMatch, cellStyle }) {
    
     const matches = useSelector((state)=>state.matches.matches);
     
@@ -28,7 +28,7 @@ function MyMatchesScreen({ userInfo, cellStyle }) {
                     </tr>
                 </thead>
                 <tbody>
-                    {myMatches.length > 0 ? myMatches.map((match)=> <MyMatchRow key = {match.id} cellStyle = {cellStyle} matchInfo = {match} userInfo = {userInfo} />) : (
+                    {myMatches.length > 0 ? myMatches.map((match)=> <MyMatchRow key = {match.id} cellStyle = {cellStyle} matchInfo = {match} setMatch = {setMatch} userInfo = {userInfo} />) : (
                         <tr>
                             <td style = {cellStyle} colSpan = "3">No matches to display</td>
                         </tr>
