@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../App.css';
 import MatchStatisticsTable from './MatchStatisticsTable';
 import NavigationMenu from './NavigationMenu';
+import PerfectMatchesTable from './PerfectMatchesTable';
 
 function ViewMatchScreen({ userInfo, match, cellStyle }) {
 
@@ -100,7 +101,10 @@ function ViewMatchScreen({ userInfo, match, cellStyle }) {
                 <h2>{matchFirstName} {matchLastName}</h2>
                 <br />
                 <br />
+
                 <MatchStatisticsTable matchFirstName = {matchFirstName} mutualMatches = {mutualMatches} totalDifference = {totalDifference} totalAbsoluteValueDifference = {totalAbsoluteValueDifference} cellStyle = {cellStyle} />
+                
+                <PerfectMatchesTable perfectMatches = {differenceMatches[0]} cellStyle = {cellStyle} />
             </div>
         );
     }
