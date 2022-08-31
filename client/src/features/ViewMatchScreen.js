@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../App.css';
+import MatchStatisticsTable from './MatchStatisticsTable';
 import NavigationMenu from './NavigationMenu';
 
 function ViewMatchScreen({ userInfo, match, cellStyle }) {
@@ -99,132 +100,7 @@ function ViewMatchScreen({ userInfo, match, cellStyle }) {
                 <h2>{matchFirstName} {matchLastName}</h2>
                 <br />
                 <br />
-                <h2>Statistics</h2>
-                <table>
-                    <tbody>
-                        <tr>
-                            <td style = {cellStyle}><strong>Number of mutual matches</strong></td>
-                            <td style = {cellStyle}>{mutualMatches}</td>
-                        </tr>
-                        <tr>
-                            <td style = {cellStyle}><strong>Your Ratings Average</strong></td>
-                            <td style = {cellStyle}>
-                            {totalDifference === 0 ? 
-                                "A Perfect Match" : 
-                                (
-                                <span>
-                                    {Math.round(Math.abs(totalDifference) * 100) / 100}
-                                    {totalDifference > 0 ? " greater than " : " less than "}
-                                    {matchFirstName}'s
-                                </span>
-                                )
-                            }
-                            </td>
-                        </tr>
-                        
-                        <tr>
-                            <td style = {cellStyle}><strong>Average Rating Difference</strong></td>
-                            <td style = {cellStyle}>
-                            {totalAbsoluteValueDifference === 0 ? 
-                                "A Perfect Match" : 
-                                (
-                                <span>
-                                    {Math.round(totalAbsoluteValueDifference * 100) / 100}
-                                </span>
-                                )
-                            }
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <br />
-                <br />
-
-                <h2>Perfect Matches</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th style = {cellStyle}>Item</th>
-                            <th style = {cellStyle}>Category</th>
-                            <th style = {cellStyle}>Rating</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        {differenceMatches[0].length > 0 ? differenceMatches[0].map((match) => (
-                            <tr key = {match.myRating.item.id}>
-                                <td style = {cellStyle}>{match.myRating.item.name}</td>
-                                <td style = {cellStyle}>{match.myRating.item.category.name}</td>
-                                <td style = {cellStyle}>{match.myRating.rating}</td>
-                            </tr>
-                        )
-                        ) :
-                    (
-                        <tr>
-                            <td style = {cellStyle} colSpan = "3">No perfect matches</td>
-                        </tr>
-                    )
-                    }
-                    </tbody>
-                </table>
-                <br />
-                <br />
-
-                <h2>Biggest Differences</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th style = {cellStyle}>Item</th>
-                            <th style = {cellStyle}>Category</th>
-                            <th style = {cellStyle}>Your Rating</th>
-                            <th style = {cellStyle}>{matchFirstName}'s Rating</th>
-                            <th style = {cellStyle}>Difference</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        {differenceMatches[biggestDifference].map((match) => (
-                            <tr key = {match.myRating.item.id}>
-                                <td style = {cellStyle}>{match.myRating.item.name}</td>
-                                <td style = {cellStyle}>{match.myRating.item.category.name}</td>
-                                <td style = {cellStyle}>{match.myRating.rating}</td>
-                                <td style = {cellStyle}>{match.matchRating.rating}</td>
-                                <td style = {cellStyle}>{match.myRating.rating - match.matchRating.rating}</td>
-                            </tr>
-                            ))
-                        }
-                    </tbody>
-                </table>
-                <br />
-                <br />
-
-                <h2>Smallest Differences</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th style = {cellStyle}>Item</th>
-                            <th style = {cellStyle}>Category</th>
-                            <th style = {cellStyle}>Your Rating</th>
-                            <th style = {cellStyle}>{matchFirstName}'s Rating</th>
-                            <th style = {cellStyle}>Difference</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        {differenceMatches[smallestDifference].map((match) => (
-                            <tr key = {match.myRating.item.id}>
-                                <td style = {cellStyle}>{match.myRating.item.name}</td>
-                                <td style = {cellStyle}>{match.myRating.item.category.name}</td>
-                                <td style = {cellStyle}>{match.myRating.rating}</td>
-                                <td style = {cellStyle}>{match.matchRating.rating}</td>
-                                <td style = {cellStyle}>{match.myRating.rating - match.matchRating.rating}</td>
-                            </tr>
-                            ))
-                        }
-                    </tbody>
-                </table>
-                <br />
-                <br />
+                <MatchStatisticsTable matchFirstName = {matchFirstName} mutualMatches = {mutualMatches} totalDifference = {totalDifference} totalAbsoluteValueDifference = {totalAbsoluteValueDifference} cellStyle = {cellStyle} />
             </div>
         );
     }
