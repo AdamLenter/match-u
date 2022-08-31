@@ -35,18 +35,14 @@ function ViewMatchScreen({ userInfo, match, cellStyle }) {
         .then(() => setMatchLoaded(true))
     }
 
-    let mutualMatches = 0;
+    let mutualMatches = [];
     let currentCount = 0;
     let totalDifference = 0;
     let totalAbsoluteValueDifference = 0;
     let biggestDifference = 0;
     let smallestDifference = 9;
-
-    let differenceMatches = {}
-
-    for(let x = 0; x < 10; x++) {
-        differenceMatches[x] = [];
-    }
+    let highestCombinedRating = 0;
+    let lowestCombinedRating = 20;
     
     if(userInfo.contact && userInfo.contact.contact_ratings && userInfo.contact.contact_ratings.length > 0 && matchRatings.length > 0) {
         //The user has ratings:
@@ -74,18 +70,21 @@ function ViewMatchScreen({ userInfo, match, cellStyle }) {
             }
 
             if(sortedMatchRatings[currentCount].item.id === mySortedRatings[i].item.id) {
-                mutualMatches += 1;
-
                 const difference = Number(mySortedRatings[i].rating) - Number(sortedMatchRatings[currentCount].rating);
                 totalDifference += difference;
                 
                 const absoluteValueOfDifference = Math.abs(difference);
                 totalAbsoluteValueDifference += absoluteValueOfDifference;
 
+                const combinedRating = mySortedRatings[i].rating + sortedMatchRatings[currentCount].rating;
+
                 biggestDifference = Math.max(biggestDifference, absoluteValueOfDifference);
                 smallestDifference = Math.min(smallestDifference, absoluteValueOfDifference);
 
-                differenceMatches[absoluteValueOfDifference].push({
+                highestCombinedRating = Math.Max(highestCombinedRating, combinedRating);
+                lowestCombinedRating = Math.Min(lowestCombinedRating, combinedRating);
+
+                mutualMatches.push({
                     myRating: mySortedRatings[i], 
                     matchRating: sortedMatchRatings[currentCount]
                     })
@@ -93,7 +92,7 @@ function ViewMatchScreen({ userInfo, match, cellStyle }) {
         }
     }
    
-    if(matchContactId && mutualMatches > 0) {
+    if(matchContactId && mutualMatches.length > 0) {
         return (
             <div>
                 <NavigationMenu />
@@ -102,9 +101,9 @@ function ViewMatchScreen({ userInfo, match, cellStyle }) {
                 <br />
                 <br />
 
-                <MatchStatisticsTable matchFirstName = {matchFirstName} mutualMatches = {mutualMatches} totalDifference = {totalDifference} totalAbsoluteValueDifference = {totalAbsoluteValueDifference} cellStyle = {cellStyle} />
+                <MatchStatisticsTable matchFirstName = {matchFirstName} numberOfMutualMatches = {mutualMatches.length} totalDifference = {totalDifference} totalAbsoluteValueDifference = {totalAbsoluteValueDifference} cellStyle = {cellStyle} />
                 
-                <PerfectMatchesTable perfectMatches = {differenceMatches[0]} cellStyle = {cellStyle} />
+                <PerfectMatchesTable perfectMatches = {mutualMatches.filter((match)=>match.myRating.rating === match.matchRating.rating)} cellStyle = {cellStyle} />
             </div>
         );
     }
