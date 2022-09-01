@@ -9,7 +9,7 @@ function MatchStatisticsTable({ matchFirstName, numberOfMutualMatches, totalDiff
             <table>
                 <tbody>
                     <tr>
-                        <td style = {cellStyle}><strong>Number of mutual matches</strong></td>
+                        <td style = {cellStyle}><strong>Number of shared matches</strong></td>
                         <td style = {cellStyle}>{numberOfMutualMatches}</td>
                     </tr>
                     <tr>
