@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '../App.css';
 
-function MatchStatisticsTable({ matchFirstName, mutualMatches, totalDifference, totalAbsoluteValueDifference, cellStyle }) {
+function MatchStatisticsTable({ matchFirstName, numberOfMutualMatches, totalDifference, totalAbsoluteValueDifference, cellStyle }) {
 
     return (
         <div>
@@ -10,7 +10,7 @@ function MatchStatisticsTable({ matchFirstName, mutualMatches, totalDifference, 
                 <tbody>
                     <tr>
                         <td style = {cellStyle}><strong>Number of mutual matches</strong></td>
-                        <td style = {cellStyle}>{mutualMatches}</td>
+                        <td style = {cellStyle}>{numberOfMutualMatches}</td>
                     </tr>
                     <tr>
                         <td style = {cellStyle}><strong>Your Ratings Average</strong></td>
