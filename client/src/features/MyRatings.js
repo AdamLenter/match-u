@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../App.css';
+import IndividualRatingsTable from './IndividualRatingsTable';
 import NavigationMenu from './NavigationMenu';
 import RatingRow from './RatingRow';
 
@@ -53,22 +54,7 @@ function MyRatings({ userInfo, cellStyle }) {
             <br />
             <br />
             
-            <table>
-                <thead>
-                    <tr>
-                        <th style = {cellStyle}>Category</th>
-                        <th style = {cellStyle}>Item</th>
-                        <th style = {cellStyle}>Rating</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {sortedRatings.length > 0 ? sortedRatings.map((rating)=><RatingRow key = {rating.id} rating = {rating}  cellStyle = {cellStyle}/>) : (
-                        <tr>
-                            <td colSpan = '3'>(no matching items)</td>
-                        </tr>
-                    )}
-                </tbody>
-            </table>
+            <IndividualRatingsTable ratings = {sortedRatings} cellStyle = {cellStyle} />
         </div>
     );
 }
