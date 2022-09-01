@@ -3,7 +3,7 @@ import '../App.css';
 import NavigationMenu from './NavigationMenu';
 
 function MatchComparisonTable({ matchFirstName, matches, cellStyle, differenceFieldPresent, combinedFieldPresent}) {
-    console.log(combinedFieldPresent);
+   
     return (
         <div>
             <table>

@@ -6,10 +6,28 @@ import MatchStatisticsTable from './MatchStatisticsTable';
 import NavigationMenu from './NavigationMenu';
 import PerfectMatchesTable from './PerfectMatchesTable';
 
+import Switch from '@mui/material/Switch';
+
 function ViewMatchScreen({ userInfo, match, cellStyle }) {
 
     const [matchRatings, setMatchRatings] = useState([]);
     const [matchLoaded, setMatchLoaded] = useState(false);
+
+    const [matchInfoToDisplay, setMatchInfoToDisplay] = useState({
+        statistics: true, 
+        smallestDifference: true, 
+        biggestDifference: true,  
+        highestCombined: true, 
+        lowestCombined: true, 
+        allMutualRatings: true,
+        allMatchRatings: true
+    })
+
+    function handleDisplaySwitch(event) {
+        let updatedDataToDisplay = {...matchInfoToDisplay};
+        updatedDataToDisplay[event.target.name] = !updatedDataToDisplay[event.target.name];
+        setMatchInfoToDisplay(updatedDataToDisplay);
+    }
 
     let matchContactId
     let matchFirstName = "";
@@ -98,37 +116,115 @@ function ViewMatchScreen({ userInfo, match, cellStyle }) {
         return (
             <div>
                 <NavigationMenu />
-                <h1>View Match</h1>
-                <h2>{matchFirstName} {matchLastName}</h2>
                 <br />
+                <h1>{matchFirstName} {matchLastName}</h1>
                 <br />
-
-                <MatchStatisticsTable matchFirstName = {matchFirstName} numberOfMutualMatches = {mutualMatches.length} totalDifference = {totalDifference} totalAbsoluteValueDifference = {totalAbsoluteValueDifference} cellStyle = {cellStyle} />
                 
-                <PerfectMatchesTable perfectMatches = {mutualMatches.filter((match)=>match.myRating.rating === match.matchRating.rating)} cellStyle = {cellStyle} />
+                <div className = "formGroup">
+                    <h3>Display Data:</h3>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td style = {cellStyle}>
+                                    Statistics:
+                                    <br />
+                                    <Switch name = "statistics" checked = {matchInfoToDisplay.statistics} onChange = {handleDisplaySwitch}/>
+                                </td>
+                           
+                                <td style = {cellStyle}>Perfect Matches/<br />Smallest Differences: 
+                                    <br />
+                                    <Switch name = "smallestDifference" checked = {matchInfoToDisplay.smallestDifference} onChange = {handleDisplaySwitch}/>
+                                </td>
+                           
+                                <td style = {cellStyle}>
+                                    Biggest Differences:
+                                    <br />
+                                    <Switch name = "biggestDifference" checked = {matchInfoToDisplay.biggestDifference} onChange = {handleDisplaySwitch}/>
+                                </td>
+                            
+                                <td style = {cellStyle}>
+                                    Highest Combined: 
+                                    <br />
+                                    <Switch name = "highestCombined" checked = {matchInfoToDisplay.highestCombined} onChange = {handleDisplaySwitch}/>
+                                </td>
+            
+                                <td style = {cellStyle}>
+                                    Lowest Combined:
+                                    <br />
+                                    <Switch name = "lowestCombined" checked = {matchInfoToDisplay.lowestCombined} onChange = {handleDisplaySwitch}/>
+                                </td>
+                  
+                                <td style = {cellStyle}>
+                                    All Common Ratings:
+                                    <br />
+                                    <Switch name = "allMutualRatings" checked = {matchInfoToDisplay.allMutualRatings} onChange = {handleDisplaySwitch}/>
+                                </td>
+        
+                                <td style = {cellStyle}>
+                                    All of {matchFirstName}'s Ratings:
+                                    <br />
+                                    <Switch name = "allMatchRatings" checked = {matchInfoToDisplay.allMatchRatings} onChange = {handleDisplaySwitch}/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br />
+                    <br />
+                </div>
 
-                {smallestDifference > 0 ? ( 
-                    <div>
-                        <h2>Smallest Difference</h2>
-                        <MatchComparisonTable matchFirstName = {matchFirstName} matches = {mutualMatches.filter((match)=>Math.abs(match.myRating.rating - match.matchRating.rating) === smallestDifference)} cellStyle = {cellStyle} differenceFieldPresent = {"true"} combinedFieldPresent = "false" />
-                    </div>
-                ) : null
+                {matchInfoToDisplay.statistics ? 
+                    <MatchStatisticsTable matchFirstName = {matchFirstName} numberOfMutualMatches = {mutualMatches.length} totalDifference = {totalDifference} totalAbsoluteValueDifference = {totalAbsoluteValueDifference} cellStyle = {cellStyle} />
+                    : 
+                    null
                 }
                 
-                <h2>Biggest Differences</h2>
-                <MatchComparisonTable matchFirstName = {matchFirstName} matches = {mutualMatches.filter((match)=>Math.abs(match.myRating.rating - match.matchRating.rating) === biggestDifference)} cellStyle = {cellStyle} differenceFieldPresent = {true} combinedFieldPresent = {false} />
+                
+                {matchInfoToDisplay.smallestDifference ? (
+                    <div>
+                        <PerfectMatchesTable perfectMatches = {mutualMatches.filter((match)=>match.myRating.rating === match.matchRating.rating)} cellStyle = {cellStyle} />
 
-                <h2>Highest Combined Rating</h2>
-                <MatchComparisonTable matchFirstName = {matchFirstName} matches = {mutualMatches.filter((match)=>Math.abs(match.myRating.rating + match.matchRating.rating) === highestCombinedRating)} cellStyle = {cellStyle} differenceFieldPresent = {false} combinedFieldPresent = {true} />
+                        {smallestDifference > 0 ? ( 
+                            <div>
+                                <h2>Smallest Difference</h2>
+                                <MatchComparisonTable matchFirstName = {matchFirstName} matches = {mutualMatches.filter((match)=>Math.abs(match.myRating.rating - match.matchRating.rating) === smallestDifference)} cellStyle = {cellStyle} differenceFieldPresent = {"true"} combinedFieldPresent = "false" />
+                            </div>
+                        ) : null
+                        }
+                    </div>) : null}
+                
+                {matchInfoToDisplay.biggestDifference ? 
+                    (
+                    <div>
+                        <h2>Biggest Differences</h2>
+                        <MatchComparisonTable matchFirstName = {matchFirstName} matches = {mutualMatches.filter((match)=>Math.abs(match.myRating.rating - match.matchRating.rating) === biggestDifference)} cellStyle = {cellStyle} differenceFieldPresent = {true} combinedFieldPresent = {false} />
+                    </div>
+                    ) : null}
 
-                <h2>Lowest Combined Rating</h2>
-                <MatchComparisonTable matchFirstName = {matchFirstName} matches = {mutualMatches.filter((match)=>Math.abs(match.myRating.rating + match.matchRating.rating) === lowestCombinedRating)} cellStyle = {cellStyle} differenceFieldPresent = {false} combinedFieldPresent = {true} />
+                {matchInfoToDisplay.highestCombined ? (
+                    <div>
+                        <h2>Highest Combined Rating</h2>
+                        <MatchComparisonTable matchFirstName = {matchFirstName} matches = {mutualMatches.filter((match)=>Math.abs(match.myRating.rating + match.matchRating.rating) === highestCombinedRating)} cellStyle = {cellStyle} differenceFieldPresent = {false} combinedFieldPresent = {true} />
+                    </div>
+                    ) : null}
 
-                <h2>All Shared Ratings</h2>
-                <MatchComparisonTable matchFirstName = {matchFirstName} matches = {mutualMatches} cellStyle = {cellStyle} differenceFieldPresent = {true} combinedFieldPresent = {true} />
+                {matchInfoToDisplay.lowestCombined ? (
+                    <div>
+                        <h2>Lowest Combined Rating</h2>
+                        <MatchComparisonTable matchFirstName = {matchFirstName} matches = {mutualMatches.filter((match)=>Math.abs(match.myRating.rating + match.matchRating.rating) === lowestCombinedRating)} cellStyle = {cellStyle} differenceFieldPresent = {false} combinedFieldPresent = {true} />
+                    </div>
+                )    : null}
 
-                <h2>All of {matchFirstName}'s ratings</h2>
-                <IndividualRatingsTable ratings = {matchRatings} cellStyle = {cellStyle} />
+                {matchInfoToDisplay.allMutualRatings ? (
+                    <div>
+                        <h2>All Common Ratings</h2>
+                        <MatchComparisonTable matchFirstName = {matchFirstName} matches = {mutualMatches} cellStyle = {cellStyle} differenceFieldPresent = {true} combinedFieldPresent = {true} />
+                    </div>) : null}
+
+                {matchInfoToDisplay.allMatchRatings ? (
+                    <div>
+                        <h2>All of {matchFirstName}'s Ratings</h2>
+                        <IndividualRatingsTable ratings = {matchRatings} cellStyle = {cellStyle} />
+                    </div>) : null}
 
             </div>
         );
