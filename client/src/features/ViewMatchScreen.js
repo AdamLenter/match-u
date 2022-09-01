@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../App.css';
-import MatchCombinedTable from './MatchCombinedTable';
-import MatchDifferencesTable from './MatchDifferencesTable';
+import MatchComparisonTable from './MatchComparisonTable';
 import MatchStatisticsTable from './MatchStatisticsTable';
 import NavigationMenu from './NavigationMenu';
 import PerfectMatchesTable from './PerfectMatchesTable';
@@ -110,16 +109,23 @@ function ViewMatchScreen({ userInfo, match, cellStyle }) {
                 {smallestDifference > 0 ? ( 
                     <div>
                         <h2>Smallest Difference</h2>
-                        <MatchDifferencesTable matchFirstName = {matchFirstName} matches = {mutualMatches.filter((match)=>Math.abs(match.myRating.rating - match.matchRating.rating) === smallestDifference)} cellStyle = {cellStyle} />
+                        <MatchComparisonTable matchFirstName = {matchFirstName} matches = {mutualMatches.filter((match)=>Math.abs(match.myRating.rating - match.matchRating.rating) === smallestDifference)} cellStyle = {cellStyle} differenceFieldPresent = {"true"} combinedFieldPresent = "false" />
                     </div>
                 ) : null
                 }
                 
                 <h2>Biggest Differences</h2>
-                <MatchDifferencesTable matchFirstName = {matchFirstName} matches = {mutualMatches.filter((match)=>Math.abs(match.myRating.rating - match.matchRating.rating) === biggestDifference)} cellStyle = {cellStyle} />
+                <MatchComparisonTable matchFirstName = {matchFirstName} matches = {mutualMatches.filter((match)=>Math.abs(match.myRating.rating - match.matchRating.rating) === biggestDifference)} cellStyle = {cellStyle} differenceFieldPresent = {true} combinedFieldPresent = {false} />
 
                 <h2>Highest Combined Rating</h2>
-                <MatchCombinedTable matchFirstName = {matchFirstName} matches = {mutualMatches.filter((match)=>Math.abs(match.myRating.rating + match.matchRating.rating) === highestCombinedRating)} cellStyle = {cellStyle} />
+                <MatchComparisonTable matchFirstName = {matchFirstName} matches = {mutualMatches.filter((match)=>Math.abs(match.myRating.rating + match.matchRating.rating) === highestCombinedRating)} cellStyle = {cellStyle} differenceFieldPresent = {false} combinedFieldPresent = {true} />
+
+                <h2>Lowest Combined Rating</h2>
+                <MatchComparisonTable matchFirstName = {matchFirstName} matches = {mutualMatches.filter((match)=>Math.abs(match.myRating.rating + match.matchRating.rating) === lowestCombinedRating)} cellStyle = {cellStyle} differenceFieldPresent = {false} combinedFieldPresent = {true} />
+
+                <h2>All Shared Ratings</h2>
+                <MatchComparisonTable matchFirstName = {matchFirstName} matches = {mutualMatches} cellStyle = {cellStyle} differenceFieldPresent = {true} combinedFieldPresent = {true} />
+
             </div>
         );
     }

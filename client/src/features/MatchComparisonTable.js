@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import '../App.css';
+import NavigationMenu from './NavigationMenu';
 
-function MatchCombinedTable({ matchFirstName, matches, cellStyle }) {
-
+function MatchComparisonTable({ matchFirstName, matches, cellStyle, differenceFieldPresent, combinedFieldPresent}) {
+    console.log(combinedFieldPresent);
     return (
         <div>
             <table>
@@ -12,7 +13,9 @@ function MatchCombinedTable({ matchFirstName, matches, cellStyle }) {
                         <th style = {cellStyle}>Category</th>
                         <th style = {cellStyle}>Your Rating</th>
                         <th style = {cellStyle}>{matchFirstName}'s Rating</th>
-                        <th style = {cellStyle}>Combined Rating</th>
+                        {differenceFieldPresent ? <th style = {cellStyle}>Difference</th>: null }
+                        {combinedFieldPresent ? <th style = {cellStyle}>Combined Rating</th>: null }
+                        
                     </tr>
                 </thead>
 
@@ -23,7 +26,8 @@ function MatchCombinedTable({ matchFirstName, matches, cellStyle }) {
                             <td style = {cellStyle}>{match.myRating.item.category.name}</td>
                             <td style = {cellStyle}>{match.myRating.rating}</td>
                             <td style = {cellStyle}>{match.matchRating.rating}</td>
-                            <td style = {cellStyle}>{match.myRating.rating + match.matchRating.rating}</td>
+                            {differenceFieldPresent ? <td style = {cellStyle}>{match.myRating.rating - match.matchRating.rating}</td> : null}
+                            {combinedFieldPresent ? <td style = {cellStyle}>{match.myRating.rating + match.matchRating.rating}</td> : null}
                         </tr>
                         ))
                     }
@@ -35,4 +39,4 @@ function MatchCombinedTable({ matchFirstName, matches, cellStyle }) {
     );
 }
 
-export default MatchCombinedTable;
+export default MatchComparisonTable;
