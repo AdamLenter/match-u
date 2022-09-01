@@ -6,7 +6,9 @@ import MatchStatisticsTable from './MatchStatisticsTable';
 import NavigationMenu from './NavigationMenu';
 import PerfectMatchesTable from './PerfectMatchesTable';
 
+
 import Switch from '@mui/material/Switch';
+import { Link } from 'react-router-dom';
 
 function ViewMatchScreen({ userInfo, match, cellStyle }) {
 
@@ -226,6 +228,9 @@ function ViewMatchScreen({ userInfo, match, cellStyle }) {
                         <IndividualRatingsTable ratings = {matchRatings} cellStyle = {cellStyle} />
                     </div>) : null}
 
+                <Link to = "/myMatches">Return to My Matches</Link>
+                <br />
+                <br />
             </div>
         );
     }
@@ -234,7 +239,8 @@ function ViewMatchScreen({ userInfo, match, cellStyle }) {
             <div>
                 <NavigationMenu />
                 <br />
-                <h1>Select a Match</h1>
+                <h1>No match selected</h1>
+                <Link to = "/myMatches">Return to My Matches</Link>
             </div>
         )
     }
@@ -250,6 +256,8 @@ function ViewMatchScreen({ userInfo, match, cellStyle }) {
 
                 <h2>All of {matchFirstName}'s Ratings</h2>
                 <IndividualRatingsTable ratings = {matchRatings} cellStyle = {cellStyle} />
+                <br />
+                <Link to = "/myMatches">Return to My Matches</Link>
             </div>
         )
     }
