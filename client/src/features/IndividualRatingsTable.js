@@ -6,22 +6,26 @@ function IndividualRatingsTable({ ratings, cellStyle }) {
   
  
     return (  
-        <table>
-            <thead>
-                <tr>
-                    <th style = {cellStyle}>Category</th>
-                    <th style = {cellStyle}>Item</th>
-                    <th style = {cellStyle}>Rating</th>
-                </tr>
-            </thead>
-            <tbody>
-                {ratings.length > 0 ? ratings.map((rating)=><RatingRow key = {rating.id} rating = {rating}  cellStyle = {cellStyle}/>) : (
+        <div>
+            <table>
+                <thead>
                     <tr>
-                        <td colSpan = '3'>(no matching items)</td>
+                        <th style = {cellStyle}>Category</th>
+                        <th style = {cellStyle}>Item</th>
+                        <th style = {cellStyle}>Rating</th>
                     </tr>
-                )}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {ratings.length > 0 ? ratings.map((rating)=><RatingRow key = {rating.id} rating = {rating}  cellStyle = {cellStyle}/>) : (
+                        <tr>
+                            <td colSpan = '3'>(no matching items)</td>
+                        </tr>
+                    )}
+                </tbody>
+            </table>
+            <br />
+            <br />
+        </div>
     );
 }
 

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../App.css';
+import IndividualRatingsTable from './IndividualRatingsTable';
 import MatchComparisonTable from './MatchComparisonTable';
 import MatchStatisticsTable from './MatchStatisticsTable';
 import NavigationMenu from './NavigationMenu';
@@ -125,6 +126,9 @@ function ViewMatchScreen({ userInfo, match, cellStyle }) {
 
                 <h2>All Shared Ratings</h2>
                 <MatchComparisonTable matchFirstName = {matchFirstName} matches = {mutualMatches} cellStyle = {cellStyle} differenceFieldPresent = {true} combinedFieldPresent = {true} />
+
+                <h2>All of {matchFirstName}'s ratings</h2>
+                <IndividualRatingsTable ratings = {matchRatings} cellStyle = {cellStyle} />
 
             </div>
         );
