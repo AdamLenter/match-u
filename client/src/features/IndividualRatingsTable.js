@@ -18,7 +18,7 @@ function IndividualRatingsTable({ ratings, cellStyle }) {
                 <tbody>
                     {ratings.length > 0 ? ratings.map((rating)=><RatingRow key = {rating.id} rating = {rating}  cellStyle = {cellStyle}/>) : (
                         <tr>
-                            <td colSpan = '3'>(no matching items)</td>
+                            <td colSpan = '3'>(no items to display)</td>
                         </tr>
                     )}
                 </tbody>

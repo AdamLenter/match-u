@@ -245,7 +245,11 @@ function ViewMatchScreen({ userInfo, match, cellStyle }) {
                 <br />
                 <h1>View Match</h1>
                 <h2>{matchFirstName} {matchLastName}</h2>
-                <p>(no mutual matches)</p>
+                <p>(no shared matches)</p>
+                <br />
+
+                <h2>All of {matchFirstName}'s Ratings</h2>
+                <IndividualRatingsTable ratings = {matchRatings} cellStyle = {cellStyle} />
             </div>
         )
     }
