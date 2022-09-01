@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../App.css';
+import MatchCombinedTable from './MatchCombinedTable';
 import MatchDifferencesTable from './MatchDifferencesTable';
 import MatchStatisticsTable from './MatchStatisticsTable';
 import NavigationMenu from './NavigationMenu';
@@ -116,6 +117,9 @@ function ViewMatchScreen({ userInfo, match, cellStyle }) {
                 
                 <h2>Biggest Differences</h2>
                 <MatchDifferencesTable matchFirstName = {matchFirstName} matches = {mutualMatches.filter((match)=>Math.abs(match.myRating.rating - match.matchRating.rating) === biggestDifference)} cellStyle = {cellStyle} />
+
+                <h2>Highest Combined Rating</h2>
+                <MatchCombinedTable matchFirstName = {matchFirstName} matches = {mutualMatches.filter((match)=>Math.abs(match.myRating.rating + match.matchRating.rating) === highestCombinedRating)} cellStyle = {cellStyle} />
             </div>
         );
     }
