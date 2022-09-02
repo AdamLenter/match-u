@@ -5,15 +5,19 @@ import MatchComparisonTable from './MatchComparisonTable';
 import MatchStatisticsTable from './MatchStatisticsTable';
 import NavigationMenu from './NavigationMenu';
 import PerfectMatchesTable from './PerfectMatchesTable';
+import { useDispatch } from 'react-redux';
 
 
 import Switch from '@mui/material/Switch';
 import { Link } from 'react-router-dom';
 
-function ViewMatchScreen({ userInfo, match, cellStyle }) {
-
+function ViewMatchScreen({ userInfo, match, setMatch, cellStyle }) {
+    
+    const dispatch = useDispatch();
+    
     const [matchRatings, setMatchRatings] = useState([]);
     const [matchLoaded, setMatchLoaded] = useState(false);
+    const [matchDeleted, setMatchDeleted] = useState(false);
 
     const [matchInfoToDisplay, setMatchInfoToDisplay] = useState({
         statistics: true, 
@@ -86,8 +90,10 @@ function ViewMatchScreen({ userInfo, match, cellStyle }) {
             }
         })
         
-        for(let i = 0; i < mySortedRatings.length; i++) {
-            while(sortedMatchRatings[currentCount].item.id < mySortedRatings[i].item.id && currentCount < sortedMatchRatings.length) {
+        console.log(mySortedRatings[0].item.id)
+        console.log(sortedMatchRatings[0].item.id)
+        for(let i = 0; i < mySortedRatings.length; i++) { 
+            while(sortedMatchRatings[currentCount] && mySortedRatings[i] & sortedMatchRatings[currentCount].item && mySortedRatings[i].item && sortedMatchRatings[currentCount].item.id < mySortedRatings[i].item.id && currentCount < sortedMatchRatings.length) {
                 currentCount += 1; 
             }
 
@@ -114,6 +120,16 @@ function ViewMatchScreen({ userInfo, match, cellStyle }) {
         }
     }
    
+    function deleteMatch(){
+        fetch(`/matches/${match.id}`, {
+            method: "DELETE"})
+            .then (()=> {
+                dispatch(deleteMatch(match.id));
+                setMatch();
+                setMatchDeleted(true);
+            })
+        return;
+    } 
     if(matchContactId && mutualMatches.length > 0) {
         return (
             <div>
@@ -231,6 +247,7 @@ function ViewMatchScreen({ userInfo, match, cellStyle }) {
                 <Link to = "/myMatches">Return to My Matches</Link>
                 <br />
                 <br />
+                <button onClick = {deleteMatch}>Delete Match</button>
             </div>
         );
     }

@@ -57,7 +57,7 @@ function App() {
           <Route path="/receiveMatch" element={<ReceiveMatchScreen userInfo = {userInfo} />} />
           <Route path="/pendingMatches" element={<PendingMatchScreen userInfo = {userInfo} cellStyle = {cellStyle} />} />
           <Route path="/myMatches" element={<MyMatchesScreen userInfo = {userInfo} setMatch = {setMatch} cellStyle = {cellStyle} />} />
-          <Route path="/viewMatch" element={<ViewMatchScreen userInfo={userInfo} match = {match} cellStyle = {cellStyle} />} />
+          <Route path="/viewMatch" element={<ViewMatchScreen userInfo={userInfo} match = {match} setMatch = {setMatch} cellStyle = {cellStyle} />} />
           <Route path="/" element={<Home userInfo = {userInfo} setUserInfo = {setUserInfo} />} />
         </Routes>
     </div>
