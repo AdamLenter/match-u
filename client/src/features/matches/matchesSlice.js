@@ -27,6 +27,9 @@ reducers: {
     const index = state.matches.findIndex((match) => match.id === action.payload);
     state.matches.splice(index, 1);
   },
+  clearMatches(state, action) {
+    state.matches = [];
+  },
   },
 extraReducers: {
   [fetchMatches.pending](state){
@@ -37,7 +40,7 @@ extraReducers: {
     }
 }
 });
-export const { addMatch, updateMatch, deleteMatch } = matchesSlice.actions;
+export const { addMatch, updateMatch, deleteMatch, clearMatches } = matchesSlice.actions;
 export default matchesSlice.reducer;
 
 

@@ -14,6 +14,7 @@ import ReceiveMatchScreen from './features/ReceiveMatchScreen';
 import PendingMatchScreen from './features/PendingMatchScreen';
 import MyMatchesScreen from './features/MyMatchesScreen';
 import ViewMatchScreen from './features/ViewMatchScreen';
+import LogoutScreen from './features/LogoutScreen';
 
 function App() {
 
@@ -58,6 +59,7 @@ function App() {
           <Route path="/pendingMatches" element={<PendingMatchScreen userInfo = {userInfo} cellStyle = {cellStyle} />} />
           <Route path="/myMatches" element={<MyMatchesScreen userInfo = {userInfo} setMatch = {setMatch} cellStyle = {cellStyle} />} />
           <Route path="/viewMatch" element={<ViewMatchScreen userInfo={userInfo} match = {match} setMatch = {setMatch} cellStyle = {cellStyle} />} />
+          <Route path="/logout" element={<LogoutScreen  setMatch = {setMatch} setUserInfo = {setUserInfo} />} />
           <Route path="/" element={<Home userInfo = {userInfo} setUserInfo = {setUserInfo} />} />
         </Routes>
     </div>

@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import '../App.css';
 import { Link } from "react-router-dom";
 import NavigationMenu from './NavigationMenu';
 import thumbs from './thumbs_up_down.jpeg';
-
+import { useDispatch } from 'react-redux';
+import { fetchMatches } from './matches/matchesSlice';
 
 function Home({ userInfo, setUserInfo }) {
-  console.log(userInfo);
+  const dispatch = useDispatch();
+  
   const [formData, setFormData] = useState({
     username: "", 
     password: ""
@@ -33,20 +35,13 @@ function Home({ userInfo, setUserInfo }) {
           if (response.ok) {
             response.json().then((userInfo)=>{
               setUserInfo(userInfo);
+              dispatch(fetchMatches(userInfo.contact.id));
               setLoginError("")
             });
           } else {
             setLoginError("Username/password combination invalid. Please try again.");
           }
       })
-    }
-
-  function handleLogout() {
-    fetch("/logout", {
-        method: "DELETE"})
-        .then (()=> {
-            setUserInfo({});
-        })
     }
 
   

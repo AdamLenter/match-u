@@ -3,6 +3,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import {LinkContainer} from 'react-router-bootstrap';
+import { NavLink } from 'react-router-dom';
 
 
 function NavigationMenu() {
@@ -26,7 +27,7 @@ function NavigationMenu() {
               </LinkContainer>
             </NavDropdown>
             
-            <NavDropdown title="Matches" id="collasible-nav-dropdown">
+            <NavDropdown title="Matches" id="collapsible-nav-dropdown">
               <LinkContainer to="/makeMatch">
                 <NavDropdown.Item>Make a Match</NavDropdown.Item>
               </LinkContainer>
@@ -44,6 +45,9 @@ function NavigationMenu() {
               </LinkContainer>
 
             </NavDropdown>
+            <LinkContainer to="/logout">
+              <Nav.Link>Logout</Nav.Link>
+            </LinkContainer>
           </Nav>
         </Navbar.Collapse>
       </Container>
