@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import '../App.css';
 import { Link } from "react-router-dom";
 import NavigationMenu from './NavigationMenu';
+import thumbs from './thumbs_up_down.jpeg';
+
 
 function Home({ userInfo, setUserInfo }) {
-  
+  console.log(userInfo);
   const [formData, setFormData] = useState({
     username: "", 
     password: ""
@@ -80,8 +82,9 @@ else {
   return (
     <div>
       <NavigationMenu />
-      <h1>Welcome Home!</h1>
-      <p onClick = {handleLogout}>logout</p>
+      <br />
+      <h1>Welcome to Match U!</h1>
+      <img src={thumbs} className = "logo" alt = "thumbs up and down images" />
     </div>
   )
 }
