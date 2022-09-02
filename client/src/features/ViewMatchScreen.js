@@ -6,6 +6,7 @@ import MatchStatisticsTable from './MatchStatisticsTable';
 import NavigationMenu from './NavigationMenu';
 import PerfectMatchesTable from './PerfectMatchesTable';
 import { useDispatch } from 'react-redux';
+import { deleteMatch } from './matches/matchesSlice';
 
 
 import Switch from '@mui/material/Switch';
@@ -17,6 +18,7 @@ function ViewMatchScreen({ userInfo, match, setMatch, cellStyle }) {
     
     const [matchRatings, setMatchRatings] = useState([]);
     const [matchLoaded, setMatchLoaded] = useState(false);
+    const [deleteButtonMessage, setDeleteButtonMessage] = useState("Delete Match");
     const [matchDeleted, setMatchDeleted] = useState(false);
 
     const [matchInfoToDisplay, setMatchInfoToDisplay] = useState({
@@ -90,8 +92,6 @@ function ViewMatchScreen({ userInfo, match, setMatch, cellStyle }) {
             }
         })
         
-        console.log(mySortedRatings[0].item.id)
-        console.log(sortedMatchRatings[0].item.id)
         for(let i = 0; i < mySortedRatings.length; i++) { 
             while(sortedMatchRatings[currentCount] && mySortedRatings[i] & sortedMatchRatings[currentCount].item && mySortedRatings[i].item && sortedMatchRatings[currentCount].item.id < mySortedRatings[i].item.id && currentCount < sortedMatchRatings.length) {
                 currentCount += 1; 
@@ -120,14 +120,19 @@ function ViewMatchScreen({ userInfo, match, setMatch, cellStyle }) {
         }
     }
    
-    function deleteMatch(){
-        fetch(`/matches/${match.id}`, {
-            method: "DELETE"})
-            .then (()=> {
-                dispatch(deleteMatch(match.id));
-                setMatch();
-                setMatchDeleted(true);
-            })
+    function handleDeleteMatchButton(){
+        if(deleteButtonMessage === "Delete Match") {
+            setDeleteButtonMessage("Click if you're 1,000% sure you want to do this.")
+        }
+        else {
+            fetch(`/matches/${match.id}`, {
+                method: "DELETE"})
+                .then (()=> {
+                    dispatch(deleteMatch(match.id));
+                    setMatch();
+                    setMatchDeleted(true);
+                })
+            }
         return;
     } 
     if(matchContactId && mutualMatches.length > 0) {
@@ -247,7 +252,9 @@ function ViewMatchScreen({ userInfo, match, setMatch, cellStyle }) {
                 <Link to = "/myMatches">Return to My Matches</Link>
                 <br />
                 <br />
-                <button onClick = {deleteMatch}>Delete Match</button>
+                <button onClick = {handleDeleteMatchButton}>{deleteButtonMessage}</button>
+                <br />
+                <br />
             </div>
         );
     }
@@ -256,6 +263,7 @@ function ViewMatchScreen({ userInfo, match, setMatch, cellStyle }) {
             <div>
                 <NavigationMenu />
                 <br />
+                {matchDeleted ? <p className = "successMessage">Match successfully deleted</p> : null}
                 <h1>No match selected</h1>
                 <Link to = "/myMatches">Return to My Matches</Link>
             </div>
@@ -273,8 +281,13 @@ function ViewMatchScreen({ userInfo, match, setMatch, cellStyle }) {
 
                 <h2>All of {matchFirstName}'s Ratings</h2>
                 <IndividualRatingsTable ratings = {matchRatings} cellStyle = {cellStyle} />
-                <br />
                 <Link to = "/myMatches">Return to My Matches</Link>
+                <br />
+                <br />
+                <br />
+                <button onClick = {handleDeleteMatchButton}>{deleteButtonMessage}</button>
+                <br />
+                <br />
             </div>
         )
     }
