@@ -14,7 +14,7 @@ function EditRatingScreen({ userInfo, setUserInfo }) {
 
     const ratingId = params.ratingId;
     let ratingInfo = {};
-    if(ratingId > 0 && userInfo && userInfo.contact && userInfo.contact.contact_ratings && userInfo.contact.contact_ratings.length > 1) {
+    if(ratingId > 0 && userInfo && userInfo.contact && userInfo.contact.contact_ratings && userInfo.contact.contact_ratings.length > 0) {
         //There are ratings
         ratingInfo = userInfo.contact.contact_ratings.find((rating)=>rating.id === Number(ratingId));
     }
@@ -75,7 +75,28 @@ function EditRatingScreen({ userInfo, setUserInfo }) {
             })
 
     }
-console.log(userInfo);
+
+    function handleDeleteRating() {
+        fetch(`/contact_ratings/${ratingInfo.id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+                }
+            })
+            .then((r)=>{
+                if(r.ok) {
+                    let updatedUserInfo = {...userInfo};
+
+                    let updatedRatings = userInfo.contact.contact_ratings.filter((rating)=>Number(rating.id) !== Number(ratingId));
+
+                    updatedUserInfo.contact.contact_ratings = updatedRatings;
+
+                    setUserInfo(updatedUserInfo);
+                }
+            })
+    }
+
+    const url = `/deleteRating/${ratingId}`
     if(rating > 0) {
         return (
             <div>
@@ -97,7 +118,7 @@ console.log(userInfo);
                         </form>
                         <br />
                         <br />
-                        <Link to = "/deleteRating">Delete Rating for {ratingInfo.item.name}</Link>
+                        <Link to = {url} onClick = {handleDeleteRating}>Delete Rating for {ratingInfo.item.name}</Link>
                     </div>
                     ) : (
                     <p>
@@ -111,11 +132,11 @@ console.log(userInfo);
     }
     else {
         <div>
-                <NavigationMenu />
-                <br />
-                <h1>Edit Rating</h1>
-                <h2>Form loading...</h2>
-            </div>
+            <NavigationMenu />
+            <br />
+            <h1>Edit Rating</h1>
+            <h2>Form loading...</h2>
+        </div>
     }
 }
 

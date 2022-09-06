@@ -17,6 +17,12 @@ class ContactRatingsController < ApplicationController
         render json: contact_rating, status: :ok
     end
 
+    def destroy
+        contact_rating = ContactRating.find_by!(id: params[:id])
+        contact_rating.destroy
+        head :no_content
+    end
+
     private
     
     def contact_rating_params

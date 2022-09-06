@@ -28,5 +28,6 @@ Rails.application.routes.draw do
 
   delete "/logout", to: "sessions#destroy"
   delete "/matches/:id", to: "matches#destroy"
+  delete "/contact_ratings/:id", to: "contact_ratings#destroy"
  
 end
