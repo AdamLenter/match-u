@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get '/me/', to: 'users#show'
   
   get '/contacts', to: 'contacts#index'
+  get '/categories', to: 'categories#index'
   get '/items', to: 'items#index'
   get '/match_code/:match_code', to: 'matches#find_by'
   get '/pending_matches/:sender_contact_id', to: 'matches#pending_matches'
@@ -20,6 +21,7 @@ Rails.application.routes.draw do
   post '/users', to: 'users#create'
   post '/rating', to: 'contact_ratings#create'
   post '/matches', to: 'matches#create'
+  post '/items', to: 'items#create'
 
   patch '/matches/:id', to: 'matches#update'
 

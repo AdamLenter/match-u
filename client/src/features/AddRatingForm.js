@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux'
 import '../App.css';
+import {Link} from 'react-router-dom';
 
 function AddRatingForm({ userInfo, setUserInfo, setRatingAdded }) {
   
@@ -104,6 +105,13 @@ function AddRatingForm({ userInfo, setUserInfo, setRatingAdded }) {
                 <br />
                 <button>Submit</button>
             </form>
+            <br />
+            <br />
+            <p>
+                <strong>Not seeing your item?</strong>
+                <br />
+                Click <Link to = '/addItem'>here</Link> to add a new one.
+            </p>
         </div>
     );
 }

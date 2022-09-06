@@ -17,6 +17,9 @@ name: "items",
     error: [], 
   },
 reducers: { 
+  addItem(state, action) {
+    state.items.push(action.payload);
+  },
   },
 extraReducers: {
   [fetchItems.pending](state){
@@ -27,7 +30,7 @@ extraReducers: {
     }
 }
 });
-export const {  } = itemsSlice.actions;
+export const { addItem } = itemsSlice.actions;
 export default itemsSlice.reducer;
 
 

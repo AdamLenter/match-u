@@ -15,6 +15,7 @@ import PendingMatchScreen from './features/PendingMatchScreen';
 import MyMatchesScreen from './features/MyMatchesScreen';
 import ViewMatchScreen from './features/ViewMatchScreen';
 import LogoutScreen from './features/LogoutScreen';
+import AddItemScreen from './features/AddItemScreen';
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
   const items = useSelector((state)=>state.items.items);
   const matches = useSelector((state)=>state.matches.matches);
   const [match, setMatch] = useState({});
+  const [categories, setCategories] = useState([]);
 
   const cellStyle = {
     border: '1px solid black', 
@@ -48,10 +50,18 @@ function App() {
       }
     })
   }, [])
+
+  useEffect(() => {
+    fetch("/categories")
+    .then((r)=>r.json())
+    .then((categoryList)=>setCategories(categoryList))
+  }, [])
+  
   return (
     <div className="App">
         <Routes>
           <Route path="/createAccount/" element={<CreateAccountScreen />} />
+          <Route path="/addItem/" element={<AddItemScreen categories = {categories} />} />
           <Route path="/myRatings" element={<MyRatings userInfo = {userInfo} cellStyle = {cellStyle} />} />
           <Route path="/addARating" element={<AddRatingScreen userInfo = {userInfo}  setUserInfo = {setUserInfo} />} />
           <Route path="/makeMatch" element={<MakeMatchScreen userInfo = {userInfo} />} />
