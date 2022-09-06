@@ -51,6 +51,9 @@ th, td {
   padding: 10px;
 }
 
+label {
+  padding-right: 5px;
+}
 
 
 @keyframes App-logo-float {

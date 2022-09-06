@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   post '/items', to: 'items#create'
 
   patch '/matches/:id', to: 'matches#update'
+  patch '/contact_ratings/:id', to: 'contact_ratings#update'
 
   delete "/logout", to: "sessions#destroy"
   delete "/matches/:id", to: "matches#destroy"

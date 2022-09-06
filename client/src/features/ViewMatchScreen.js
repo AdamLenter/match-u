@@ -134,7 +134,8 @@ function ViewMatchScreen({ userInfo, match, setMatch, cellStyle }) {
                 })
             }
         return;
-    } 
+    }
+    
     if(matchContactId && mutualMatches.length > 0) {
         return (
             <div>
@@ -246,7 +247,7 @@ function ViewMatchScreen({ userInfo, match, setMatch, cellStyle }) {
                 {matchInfoToDisplay.allMatchRatings ? (
                     <div>
                         <h2>All of {matchFirstName}'s Ratings</h2>
-                        <IndividualRatingsTable ratings = {matchRatings} cellStyle = {cellStyle} />
+                        <IndividualRatingsTable ratings = {matchRatings} ratingCanBeEdited = {false} cellStyle = {cellStyle} />
                     </div>) : null}
 
                 <Link to = "/myMatches">Return to My Matches</Link>

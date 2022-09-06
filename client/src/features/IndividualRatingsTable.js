@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '../App.css';
 import RatingRow from './RatingRow';
 
-function IndividualRatingsTable({ ratings, cellStyle }) {
+function IndividualRatingsTable({ ratings, ratingCanBeEdited, cellStyle }) {
   
  
     return (  
@@ -16,14 +16,13 @@ function IndividualRatingsTable({ ratings, cellStyle }) {
                     </tr>
                 </thead>
                 <tbody>
-                    {ratings.length > 0 ? ratings.map((rating)=><RatingRow key = {rating.id} rating = {rating}  cellStyle = {cellStyle}/>) : (
+                    {ratings.length > 0 ? ratings.map((rating)=><RatingRow key = {rating.id} rating = {rating} ratingCanBeEdited = {ratingCanBeEdited} cellStyle = {cellStyle}/>) : (
                         <tr>
                             <td colSpan = '3'>(no items to display)</td>
                         </tr>
                     )}
                 </tbody>
             </table>
-            <br />
             <br />
         </div>
     );

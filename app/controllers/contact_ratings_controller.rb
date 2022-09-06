@@ -9,6 +9,14 @@ class ContactRatingsController < ApplicationController
         render json: contact_ratings, status: :ok
     end
 
+    def update
+        contact_rating = ContactRating.find(params[:id])
+        
+        contact_rating.update(contact_rating_params)
+
+        render json: contact_rating, status: :ok
+    end
+
     private
     
     def contact_rating_params

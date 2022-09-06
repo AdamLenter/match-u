@@ -16,6 +16,7 @@ import MyMatchesScreen from './features/MyMatchesScreen';
 import ViewMatchScreen from './features/ViewMatchScreen';
 import LogoutScreen from './features/LogoutScreen';
 import AddItemScreen from './features/AddItemScreen';
+import EditRatingScreen from './features/EditRatingScreen';
 
 function App() {
 
@@ -64,6 +65,7 @@ function App() {
           <Route path="/addItem/" element={<AddItemScreen categories = {categories} />} />
           <Route path="/myRatings" element={<MyRatings userInfo = {userInfo} cellStyle = {cellStyle} />} />
           <Route path="/addARating" element={<AddRatingScreen userInfo = {userInfo}  setUserInfo = {setUserInfo} />} />
+          <Route path="/editRating/:ratingId" element={<EditRatingScreen userInfo = {userInfo}  setUserInfo = {setUserInfo} />} />
           <Route path="/makeMatch" element={<MakeMatchScreen userInfo = {userInfo} />} />
           <Route path="/receiveMatch" element={<ReceiveMatchScreen userInfo = {userInfo} />} />
           <Route path="/pendingMatches" element={<PendingMatchScreen userInfo = {userInfo} cellStyle = {cellStyle} />} />
