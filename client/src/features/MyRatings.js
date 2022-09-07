@@ -57,7 +57,7 @@ function MyRatings({ userInfo, cellStyle }) {
             <IndividualRatingsTable ratings = {sortedRatings} ratingCanBeEdited = {true} cellStyle = {cellStyle} />
             {sortedRatings.length > 0 ? (
                 <div>
-                    <sup>*</sup>Hover over a rating to edit"
+                    *** Hover over a rating to edit ***
                 </div>) : null}
             <br />
             <br />

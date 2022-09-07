@@ -18,7 +18,7 @@ function EditRatingScreen({ userInfo, setUserInfo }) {
         ratingInfo = userInfo.contact.contact_ratings.find((rating)=>rating.id === Number(ratingId));
     }
 
-    if(rating && rating === 0 && ratingInfo.rating) {
+    if(rating === 0 && ratingInfo.rating) {
         setRating(ratingInfo.rating);
     }
 
