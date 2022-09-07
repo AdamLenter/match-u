@@ -18,7 +18,7 @@ function EditRatingScreen({ userInfo, setUserInfo }) {
         ratingInfo = userInfo.contact.contact_ratings.find((rating)=>rating.id === Number(ratingId));
     }
 
-    if(rating === 0 && ratingInfo.rating) {
+    if(rating && rating === 0 && ratingInfo.rating) {
         setRating(ratingInfo.rating);
     }
 
@@ -96,7 +96,7 @@ function EditRatingScreen({ userInfo, setUserInfo }) {
     }
 
     const url = `/deleteRating/${ratingId}`
-    if(rating > 0) {
+    if(ratingInfo && ratingInfo.rating) {
         return (
             <div>
                 <NavigationMenu />
@@ -130,12 +130,17 @@ function EditRatingScreen({ userInfo, setUserInfo }) {
         );
     }
     else {
-        <div>
-            <NavigationMenu />
-            <br />
-            <h1>Edit Rating</h1>
-            <h2>Form loading...</h2>
-        </div>
+        return (
+            <div>
+                <NavigationMenu />
+                <br />
+                <h1>Edit Rating</h1>
+                <h2>(rating not found)</h2>
+                <br />
+                <br />
+                <Link to = "/myRatings">Return to My Ratings</Link>
+            </div>
+        );
     }
 }
 
