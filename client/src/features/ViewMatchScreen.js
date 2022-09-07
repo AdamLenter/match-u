@@ -64,7 +64,7 @@ function ViewMatchScreen({ userInfo, match, setMatch, cellStyle }) {
     }
 
     let mutualMatches = [];
-    let currentCount = 0;
+    let matchCount = 0;
     let totalDifference = 0;
     let totalAbsoluteValueDifference = 0;
     let biggestDifference = 0;
@@ -91,20 +91,21 @@ function ViewMatchScreen({ userInfo, match, setMatch, cellStyle }) {
                 return 1;
             }
         })
+    
         
-        for(let i = 0; i < mySortedRatings.length; i++) { 
-            while(sortedMatchRatings[currentCount] && mySortedRatings[i] & sortedMatchRatings[currentCount].item && mySortedRatings[i].item && sortedMatchRatings[currentCount].item.id < mySortedRatings[i].item.id && currentCount < sortedMatchRatings.length) {
-                currentCount += 1; 
+        for(let myCount = 0; myCount < mySortedRatings.length; myCount++) { 
+            while(mySortedRatings[myCount] && sortedMatchRatings[matchCount] && sortedMatchRatings[matchCount].item && mySortedRatings[myCount].item && sortedMatchRatings[matchCount].item.id < mySortedRatings[myCount].item.id && matchCount < sortedMatchRatings.length) {
+                matchCount += 1; 
             }
 
-            if(sortedMatchRatings[currentCount].item.id === mySortedRatings[i].item.id) {
-                const difference = Number(mySortedRatings[i].rating) - Number(sortedMatchRatings[currentCount].rating);
+            if(mySortedRatings[myCount] && sortedMatchRatings[matchCount] && sortedMatchRatings[matchCount].item.id === mySortedRatings[myCount].item.id) {
+                const difference = Number(mySortedRatings[myCount].rating) - Number(sortedMatchRatings[matchCount].rating);
                 totalDifference += difference;
                 
                 const absoluteValueOfDifference = Math.abs(difference);
                 totalAbsoluteValueDifference += absoluteValueOfDifference;
 
-                const combinedRating = mySortedRatings[i].rating + sortedMatchRatings[currentCount].rating;
+                const combinedRating = mySortedRatings[myCount].rating + sortedMatchRatings[matchCount].rating;
 
                 biggestDifference = Math.max(biggestDifference, absoluteValueOfDifference);
                 smallestDifference = Math.min(smallestDifference, absoluteValueOfDifference);
@@ -113,8 +114,8 @@ function ViewMatchScreen({ userInfo, match, setMatch, cellStyle }) {
                 lowestCombinedRating = Math.min(lowestCombinedRating, combinedRating);
 
                 mutualMatches.push({
-                    myRating: mySortedRatings[i], 
-                    matchRating: sortedMatchRatings[currentCount]
+                    myRating: mySortedRatings[myCount], 
+                    matchRating: sortedMatchRatings[matchCount]
                     })
             }
         }
