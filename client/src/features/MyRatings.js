@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import '../App.css';
 import IndividualRatingsTable from './IndividualRatingsTable';
 import NavigationMenu from './NavigationMenu';
-import RatingRow from './RatingRow';
+
 
 function MyRatings({ userInfo, cellStyle }) {
   
@@ -59,6 +60,9 @@ function MyRatings({ userInfo, cellStyle }) {
                 <div>
                     *** Hover over a rating to edit ***
                 </div>) : null}
+            <br />
+            <br />
+            Click <Link to = "/addARating">here</Link> to add another rating.
             <br />
             <br />
         </div>
