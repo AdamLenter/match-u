@@ -6,6 +6,7 @@ import {Link} from 'react-router-dom';
 function AddRatingForm({ userInfo, setUserInfo, setRatingAdded }) {
   
     const items = useSelector((state)=>state.items.items);
+    const [errorMessages, setErrorMessages] = useState([]);
 
     let ratings = [];
 
@@ -64,8 +65,7 @@ function AddRatingForm({ userInfo, setUserInfo, setRatingAdded }) {
                     })
                 }
                 else {
-                //   response.json().then((errorData) => setAddBusErrors(errorData.errors));
-                    console.log("Goodbye");
+                    response.json().then((errorData) => setErrorMessages(errorData.errors));
                 }
             })
         }
@@ -83,6 +83,11 @@ function AddRatingForm({ userInfo, setUserInfo, setRatingAdded }) {
      
     return (
         <div>
+            {errorMessages ? (
+                <div>
+                    {errorMessages.map((message)=><p className = "errorMessage" key = {message}>{message}</p>)}
+                </div>
+            ) : null}
             <form onSubmit = {submitAddRatingForm}>
                 <label>Item to Rate: </label>
                 <input type = "text" name = "itemToRate" list="data" value = {formData.itemToRate} onChange = {updateItemToRate} />
