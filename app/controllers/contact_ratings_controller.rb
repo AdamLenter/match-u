@@ -1,4 +1,7 @@
 class ContactRatingsController < ApplicationController
+
+    before_action :authorize
+    
     def create
         contact_rating = ContactRating.create(contact_rating_params)
         render json: contact_rating
@@ -27,5 +30,9 @@ class ContactRatingsController < ApplicationController
     
     def contact_rating_params
         params.permit(:contact_id, :item_id, :rating)
+    end
+
+    def authorize
+        return render json: { error: "Not authorized" }, status: :unauthorized unless session.include? :user_id
     end
 end

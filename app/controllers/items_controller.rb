@@ -1,5 +1,7 @@
 class ItemsController < ApplicationController
 
+    before_action :authorize
+
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
 
 
@@ -22,4 +24,9 @@ class ItemsController < ApplicationController
     def item_params
         params.permit(:category_id, :name)
     end
+
+    def authorize
+        return render json: { error: "Not authorized" }, status: :unauthorized unless session.include? :user_id
+    end
+    
 end
