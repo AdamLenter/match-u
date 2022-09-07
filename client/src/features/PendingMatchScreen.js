@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import '../App.css';
 import NavigationMenu from './NavigationMenu';
 import PendingMatchRow from './PendingMatchRow';
 
-function PendingMatchScreen({ userInfo, cellStyle }) {
+function PendingMatchScreen({ userInfo, match, setMatch, cellStyle }) {
    
     const matches = useSelector((state)=>state.matches.matches);
-    const [confirmedMatch, setConfirmedMatch] = useState({});
+    const [confirmedMatch, setConfirmedMatch] = useState(false);
     const [deletedMatchMessage, setDeletedMatchMessage] = useState();
   
     let pendingMatches = [];
@@ -16,7 +17,7 @@ function PendingMatchScreen({ userInfo, cellStyle }) {
         pendingMatches = matches.filter((match)=>match.sender_contact_id === userInfo.contact.id && match.recipient_contact_id && !match.match_confirmed);
     }
 
-    if(!confirmedMatch.id ) {
+    if(!confirmedMatch) {
         return (
             <div>
                 <NavigationMenu />
@@ -32,7 +33,7 @@ function PendingMatchScreen({ userInfo, cellStyle }) {
                         </tr>
                     </thead>
                     <tbody>
-                        {pendingMatches.length > 0 ? pendingMatches.map((match)=> <PendingMatchRow key = {match.id} cellStyle = {cellStyle} matchInfo = {match} setConfirmedMatch = {setConfirmedMatch} setDeletedMatchMessage = {setDeletedMatchMessage} />) : (
+                        {pendingMatches.length > 0 ? pendingMatches.map((match)=> <PendingMatchRow key = {match.id} cellStyle = {cellStyle} matchInfo = {match} setConfirmedMatch = {setConfirmedMatch} setMatch = {setMatch} setDeletedMatchMessage = {setDeletedMatchMessage} />) : (
                             <tr>
                                 <td style = {cellStyle} colSpan = "3">No pending matches</td>
                             </tr>
@@ -49,9 +50,9 @@ function PendingMatchScreen({ userInfo, cellStyle }) {
                 <br />
                 <h1>Congratulations!</h1>
                 <p>
-                    Your match with <strong>{confirmedMatch.recipient_contact.first_name} {confirmedMatch.recipient_contact.last_name} </strong>has been confirmed.
+                    Your match with <strong>{match.recipient_contact.first_name} {match.recipient_contact.last_name} </strong>has been confirmed.
                     <br />
-                    Click <strong>here</strong> to see details.
+                    Click <Link to = "/viewMatch">here</Link> to see details.
                 </p>
             </div>
             );

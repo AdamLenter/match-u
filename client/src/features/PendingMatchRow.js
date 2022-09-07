@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import '../App.css';
 import { updateMatch, deleteMatch } from './matches/matchesSlice';
-import NavigationMenu from './NavigationMenu';
 
 
-function PendingMatchRow({ cellStyle, matchInfo, setConfirmedMatch, setDeletedMatchMessage}) {
+function PendingMatchRow({ cellStyle, matchInfo, setConfirmedMatch, setMatch, setDeletedMatchMessage}) {
    
     const dispatch = useDispatch();
 
@@ -21,7 +20,8 @@ function PendingMatchRow({ cellStyle, matchInfo, setConfirmedMatch, setDeletedMa
                 let updatedMatch = {...matchInfo};
                 updatedMatch.match_confirmed = true;
                 dispatch(updateMatch(updatedMatch));
-                setConfirmedMatch(matchInfo);
+                setConfirmedMatch(true);
+                setMatch(matchInfo);
                 })
     }
 
