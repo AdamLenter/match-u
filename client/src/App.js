@@ -67,7 +67,7 @@ function App() {
           <Route path="/myRatings" element={<MyRatings userInfo = {userInfo} cellStyle = {cellStyle} />} />
           <Route path="/addARating" element={<AddRatingScreen userInfo = {userInfo}  setUserInfo = {setUserInfo} />} />
           <Route path="/editRating/:ratingId" element={<EditRatingScreen userInfo = {userInfo}  setUserInfo = {setUserInfo} />} />
-          <Route path="/deleteRating/:ratingId" element={<DeleteRatingScreen userInfo = {userInfo}  setUserInfo = {setUserInfo} />} />
+          <Route path="/deleteRating/:ratingId" element={<DeleteRatingScreen userInfo = {userInfo} />} />
           <Route path="/makeMatch" element={<MakeMatchScreen userInfo = {userInfo} />} />
           <Route path="/receiveMatch" element={<ReceiveMatchScreen userInfo = {userInfo} />} />
           <Route path="/pendingMatches" element={<PendingMatchScreen userInfo = {userInfo} cellStyle = {cellStyle} />} />

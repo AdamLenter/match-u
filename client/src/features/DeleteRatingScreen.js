@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import '../App.css';
 import NavigationMenu from './NavigationMenu';
 
-function DeleteRatingScreen({ userInfo, setUserInfo }) {
+function DeleteRatingScreen({ userInfo }) {
     
     const params = useParams();
-
 
     return (
         <div>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import '../App.css';
 import NavigationMenu from './NavigationMenu';
 import { addMatch } from './matches/matchesSlice';
@@ -8,7 +8,6 @@ function MakeMatchScreen({ userInfo }) {
     const [matchCode, setMatchCode] = useState("");
     const [buttonTerm, setButtonTerm] = useState();
    
-    const matches = useSelector((state)=>state.matches.matches);
     const dispatch = useDispatch();
 
     const buttonPhrases = [

@@ -6,7 +6,6 @@ import {Link} from 'react-router-dom';
 function AddRatingForm({ userInfo, setUserInfo, setRatingAdded }) {
   
     const items = useSelector((state)=>state.items.items);
-    const [itemAdded, setItemAdded] = useState(false);
 
     let ratings = [];
 
@@ -81,8 +80,7 @@ function AddRatingForm({ userInfo, setUserInfo, setRatingAdded }) {
             itemsToDisplay.splice(itemIndex, 1);
         })
     }
-    
-    if(!itemAdded) 
+     
     return (
         <div>
             <form onSubmit = {submitAddRatingForm}>

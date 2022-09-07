@@ -65,7 +65,6 @@ function AddItemScreen({ categories }) {
         }
     }
     
-console.log(item);
     if(formData.categoryId > 0) {
         if(!item.name) {
             return (

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import AddRatingForm from './AddRatingForm'
 import '../App.css';
 import { Link, useParams } from 'react-router-dom';
 import NavigationMenu from './NavigationMenu';
