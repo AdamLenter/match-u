@@ -31,6 +31,9 @@ function AddRatingScreen({ userInfo, setUserInfo }) {
                         <br />
                         <br />
                         Click <Link to = "/addARating" onClick = {handleAddAdditionalRating}>here</Link> to add another rating
+                        <br />
+                        <br />
+                        <Link to = "/myRatings">Return to My Ratings</Link>
                     </p>
                 </div>
     )}
