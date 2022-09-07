@@ -211,7 +211,7 @@ function ViewMatchScreen({ userInfo, match, setMatch, cellStyle }) {
                         {smallestDifference > 0 ? ( 
                             <div>
                                 <h2>Smallest Difference</h2>
-                                <MatchComparisonTable matchFirstName = {matchFirstName} matches = {mutualMatches.filter((match)=>Math.abs(match.myRating.rating - match.matchRating.rating) === smallestDifference)} cellStyle = {cellStyle} differenceFieldPresent = {"true"} combinedFieldPresent = "false" />
+                                <MatchComparisonTable matchFirstName = {matchFirstName} matches = {mutualMatches.filter((match)=>Math.abs(match.myRating.rating - match.matchRating.rating) === smallestDifference)} cellStyle = {cellStyle} differenceFieldPresent = {true} combinedFieldPresent = {false} />
                             </div>
                         ) : null
                         }
