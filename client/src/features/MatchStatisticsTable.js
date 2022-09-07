@@ -4,6 +4,7 @@ import '../App.css';
 function MatchStatisticsTable({ matchFirstName, numberOfMutualMatches, totalDifference, totalAbsoluteValueDifference, cellStyle }) {
 
     return (
+        //Need to fix average difference.
         <div>
             <h2>Statistics</h2>
             <table>
