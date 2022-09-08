@@ -36,7 +36,7 @@ function MatchStatisticsTable({ matchFirstName, numberOfMutualMatches, totalDiff
                             "A Perfect Match" : 
                             (
                             <span>
-                                {Math.round(totalAbsoluteValueDifference * 100) / 100}
+                                {Math.round(totalAbsoluteValueDifference * 100) / (numberOfMutualMatches * 100)}
                             </span>
                             )
                         }
