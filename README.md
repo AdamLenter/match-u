@@ -61,3 +61,6 @@ Click the "Confirm" button next to the person's name and the match will be compl
 If there are any matches on that list that you do not recognize, click the delete button to remove them. 
 Finally, to see your comparisons, go to Matches > my matches.
 On the following screen, you will see a comparison of your similar ratings, different ratings, and other statistics about how closely you are aligned. 
+
+## Demo Video
+If you would like to see this project in action, check out this demo video: https://www.youtube.com/watch?v=ylg8-rKmmFU&t=1s
