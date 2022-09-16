@@ -1,9 +1,9 @@
-[][][][]      [][][][] \n
-  [][][][]  [][][][] \n
-  [][]   [][]   [][] \n
-  [][]    []    [][] \n
-  [][]          [][] \n 
-[][][][]      [][][][] \n
+[][][][]      [][][][] <br />
+  [][][][]  [][][][] <br />
+  [][]   [][]   [][] <br />
+  [][]    []    [][] <br />
+  [][]          [][] <br />
+[][][][]      [][][][] <br />
  
 # Match U
 Match U is an app designed to enhance in-person connections by making it easy to compare people's likes and dislikes in order to prompt a fun conversation.
