@@ -43,12 +43,20 @@ Then navigate to the client folder and enter "npm start." This will launch react
 The demo system is populated with a small Faker data. To begin using it, click the link to create an account.
 On the create account screen, enter your name, a username, and password.
 Once the account is set up, return to the main screen and login.
-Once you are logged in, you can begin to rate movies, tv shows, etc., by clicking: My ratings > Add a rating.
+Once you are logged in, you can begin to rate movies, tv shows, etc., by clicking: 
+My ratings > Add a rating.
 On the subsequent screen, begin to type an item to rate in the textbox. Many possible items may appear. Select the appropriate item, and add a rating between 1-10.
 Hit submit, and you will be taken to a confirmation screen, on which you will see links to either add a new rating or return to your list of ratings.
 
-To compare your ratings to someone else, click Matches > Make a Match.
+To compare your ratings to someone else, click: Matches > Make a Match.
 On the subsequent screen, click the button, and you will receive a match code. 
 Give that match code to the person with whom you would like to match. 
-That person should then click Matches > Receive a Match and enter the match code.
-Lastly, the person who sent the code needs to confirm the match. To do so s/he should go to 
+That person should then click: Matches > Receive a Match.  
+On the subsequent screen, s/he should enter the match code.
+Lastly, for security purposes, you will need to confirm that you matched with the correct person. 
+To do so go to: Matches > Pending matches.
+On that screen,you will see a list of anybody who has attempted to match with you by entering one of your match codes. 
+Click the "Confirm" button next to the person's name and the match will be complete.
+If there are any matches on that list that you do not recognize, click the delete button to remove them. 
+Finally, to see your comparisons, go to Matches > my matches.
+On the following screen, you will see a comparison of your similar ratings, different ratings, and other statistics about how closely you are aligned. 
