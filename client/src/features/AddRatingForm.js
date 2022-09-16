@@ -71,52 +71,63 @@ function AddRatingForm({ userInfo, setUserInfo, setRatingAdded }) {
         }
     }
 
-    let itemsToDisplay = [...items];
-    
+    let itemsToDisplay = [];
+    if(items && items.length > 0) {
+        
+        itemsToDisplay = [...items];
+        
 
-    if(userInfo.contact && userInfo.contact.contact_ratings) {
-        userInfo.contact.contact_ratings.forEach((rating)=> {
-            const itemIndex = itemsToDisplay.findIndex((item)=>item.id === rating.item.id);
-            itemsToDisplay.splice(itemIndex, 1);
-        })
+        if(userInfo.contact && userInfo.contact.contact_ratings) {
+            userInfo.contact.contact_ratings.forEach((rating)=> {
+                const itemIndex = itemsToDisplay.findIndex((item)=>item.id === rating.item.id);
+                itemsToDisplay.splice(itemIndex, 1);
+            })
+        }
     }
      
-    return (
-        <div>
-            {errorMessages ? (
-                <div>
-                    {errorMessages.map((message)=><p className = "errorMessage" key = {message}>{message}</p>)}
-                </div>
-            ) : null}
-            <form onSubmit = {submitAddRatingForm}>
-                <label>Item to Rate: </label>
-                <input type = "text" name = "itemToRate" list="data" value = {formData.itemToRate} onChange = {updateItemToRate} />
+    if(itemsToDisplay && itemsToDisplay.length > 0) {
+        return (
+            <div>
+                {errorMessages ? (
+                    <div>
+                        {errorMessages.map((message)=><p className = "errorMessage" key = {message}>{message}</p>)}
+                    </div>
+                ) : null}
+                <form onSubmit = {submitAddRatingForm}>
+                    <label>Item to Rate: </label>
+                    <input type = "text" name = "itemToRate" list="data" value = {formData.itemToRate} onChange = {updateItemToRate} />
 
-                <datalist id="data">
-                    {itemsToDisplay.map((item) =>
-                    <option key={item.id}>{item.category.name} - {item.name}</option>
-                    )}
-                </datalist>
-                <br />
+                    <datalist id="data">
+                        {itemsToDisplay.map((item) =>
+                        <option key={item.id}>{item.category.name} - {item.name}</option>
+                        )}
+                    </datalist>
+                    <br />
 
-                <label>Rating: </label>
-                <select name = "rating" value = {formData.rating} onChange={updateItemToRate}>
-                    {
-                    ratings.map((rating)=><option key = {rating} value = {rating}>{rating}</option>)
-                    }
-                </select>
+                    <label>Rating: </label>
+                    <select name = "rating" value = {formData.rating} onChange={updateItemToRate}>
+                        {
+                        ratings.map((rating)=><option key = {rating} value = {rating}>{rating}</option>)
+                        }
+                    </select>
+                    <br />
+                    <button>Submit</button>
+                </form>
                 <br />
-                <button>Submit</button>
-            </form>
-            <br />
-            <br />
-            <p>
-                <strong>Not seeing your item?</strong>
                 <br />
-                Click <Link to = '/addItem'>here</Link> to add a new one.
-            </p>
-        </div>
-    );
+                <p>
+                    <strong>Not seeing your item?</strong>
+                    <br />
+                    Click <Link to = '/addItem'>here</Link> to add a new one.
+                </p>
+            </div>
+        );
+    }
+    else {
+        return(
+            <p><strong>Form loading...</strong></p>
+        );
+    }
 }
 
 export default AddRatingForm;
