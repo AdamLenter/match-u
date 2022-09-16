@@ -43,6 +43,9 @@ group :development, :test do
   gem 'rspec-rails', '~> 5.0.0'
 end
 
+# https://github.com/faker-ruby/faker
+gem "faker", "~> 2.18"
+
 group :test do
   gem 'rspec-json_expectations'
   gem 'shoulda-matchers', '~> 4.0'

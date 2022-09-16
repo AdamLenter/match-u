@@ -13,13 +13,22 @@ tv_shows = Category.create({name: "TV Shows"})
 activities = Category.create({name: "Activities"})
 sports_teams = Category.create({name: "Sports Teams"})
 
-Item.create({name: "Titanic", category: movies})
-Item.create({name: "The Big Lebowski", category: movies})
-Item.create({name: "Gino's Pizza", category: restaurants})
-Item.create({name: "McDonald's", category: restaurants})
-Item.create({name: "The Office", category: tv_shows})
-Item.create({name: "Pardon the Interruption", category: tv_shows})
-Item.create({name: "Skiing", category: activities})
-Item.create({name: "Hiking", category: activities})
+i = 0;
+
+while i < 50 do
+    Item.create({name: Faker::Movie.title, category: movies})
+    Item.create({name: Faker::Restaurant.name, category: restaurants})
+    Item.create({name: Faker::Hobby.activity, category: activities})
+
+    i = i + 1
+end
+
+i = 0
+
+while i < 25 do 
+    Item.create({name: Faker::Sports::Basketball.team, category: sports_teams})
+    Item.create({name: Faker::Sports::Football.team, category: sports_teams})
+    i = i + 1
+end
 
 puts "Done seeding! That will be $8,000"
