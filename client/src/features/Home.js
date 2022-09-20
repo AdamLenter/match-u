@@ -3,10 +3,12 @@ import '../App.css';
 import { Link } from "react-router-dom";
 import NavigationMenu from './NavigationMenu';
 import thumbs from './thumbs_up_down.jpeg';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchMatches } from './matches/matchesSlice';
+import { fetchItems } from './items/itemsSlice';
 
 function Home({ userInfo, setUserInfo }) {
+  const items = useSelector((state)=>state.items.items);
   const dispatch = useDispatch();
   
   const [formData, setFormData] = useState({
@@ -25,7 +27,7 @@ function Home({ userInfo, setUserInfo }) {
 
   function handleLogin(event) {
     event.preventDefault();
-   
+
     fetch("/login", {
       method: "POST", 
       headers: {"Content-Type": "application/json"}, 
@@ -36,6 +38,7 @@ function Home({ userInfo, setUserInfo }) {
             response.json().then((userInfo)=>{
               setUserInfo(userInfo);
               dispatch(fetchMatches(userInfo.contact.id));
+              dispatch(fetchItems());
               setLoginError("")
             });
           } else {
@@ -44,7 +47,6 @@ function Home({ userInfo, setUserInfo }) {
       })
     }
 
-  
   if(!userInfo['username']) {
     return (
       <div>
