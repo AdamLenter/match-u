@@ -92,7 +92,7 @@ function AddRatingForm({ userInfo, setUserInfo, setRatingAdded }) {
             })
         }
     }
-     console.log(items);
+    
     if(itemsToDisplay && itemsToDisplay.length > 0) {
         return (
             <div>

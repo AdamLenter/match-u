@@ -23,7 +23,7 @@ function AddRatingScreen({ userInfo, setUserInfo }) {
                     <p>
                         <strong>Rating successfully added:</strong>
                         <br />
-                        <strong>Category: </strong>{ratingAdded.item.category.name}
+                        <strong>Category: </strong>{ratingAdded.item.category_name}
                         <br />
                         <strong>Item: </strong>{ratingAdded.item.name}
                         <br />
