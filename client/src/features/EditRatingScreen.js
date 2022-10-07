@@ -102,7 +102,7 @@ function EditRatingScreen({ userInfo, setUserInfo }) {
                 <NavigationMenu />
                 <br />
                 <h1>Edit Rating</h1>
-                <h2>{ratingInfo.item.category.name} - {ratingInfo.item.name}</h2>
+                <h2>{ratingInfo.item.category_name} - {ratingInfo.item.name}</h2>
 
                 {!ratingUpdated ? (
                     <div>
