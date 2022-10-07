@@ -71,28 +71,28 @@ function AddRatingForm({ userInfo, setUserInfo, setRatingAdded }) {
         }
     }
 
-    let itemsToDisplay = [...items];
-    let sortedItems = [];
-    if(itemsToDisplay && itemsToDisplay.length > 0) {
-        
-        sortedItems = itemsToDisplay.sort((a,b)=>{
+    let itemsToDisplay = []
+    let sortedItemsToDisplay = [];
+    if(items && items.length > 0) {
+       
+        itemsToDisplay = [...items];
+
+        sortedItemsToDisplay = itemsToDisplay.sort((a, b) => {
             if(a.category.name.concat(a.name) < b.category.name.concat(b.name)) {
                 return -1;
             }
             else {
                 return 1;
             }
-        });
-        
-
+        })
         if(userInfo.contact && userInfo.contact.contact_ratings) {
             userInfo.contact.contact_ratings.forEach((rating)=> {
-                const itemIndex = sortedItems.findIndex((item)=>item.id === rating.item.id);
-                sortedItems.splice(itemIndex, 1);
+                const itemIndex = itemsToDisplay.findIndex((item)=>item.id === rating.item.id);
+                itemsToDisplay.splice(itemIndex, 1);
             })
         }
     }
-     
+     console.log(items);
     if(itemsToDisplay && itemsToDisplay.length > 0) {
         return (
             <div>
@@ -106,7 +106,7 @@ function AddRatingForm({ userInfo, setUserInfo, setRatingAdded }) {
                     <input type = "text" name = "itemToRate" list="data" value = {formData.itemToRate} onChange = {updateItemToRate} />
 
                     <datalist id="data">
-                        {itemsToDisplay.map((item) =>
+                        {sortedItemsToDisplay.map((item) =>
                         <option key={item.id}>{item.category.name} - {item.name}</option>
                         )}
                     </datalist>

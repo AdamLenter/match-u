@@ -1,22 +1,6 @@
-<!-- language: lang-none -->
-    [][][][]      [][][][]        ][]][][]       [][][][][][][][]     ][][][][    [][][][]  [][][][]
-      [][][][]  [][][][]           ][  ][              [][]         ][]      ][     [][]      [][]
-      [][]   [][]   [][]          []    []             [][]        [][              [][]      [][]  
-      [][]    []    [][]         ][][][][][            [][]        [][              [][][][[]][][]  
-      [][]          [][]        ][        ][           [][]        [][              [][]      [][]
-      [][]          [][]       ][          []          [][]         ][]      ][     [][]      [][]
-    [][][][]      [][][][]  [][][][]    ][][][][       [][]           ][][][][    [][][][]  [][][][]
-                                        
+![Alt text](/client/src/features/thumbs_up_down.jpeg "Match U")
 
-                                        [][][][]    [][][][]
-                                          [][]        [][]
-                                          [][]        [][]
-                                          [][]        [][]
-                                          [][]        [][]
-                                          [][]        [][]     
-                                            [][][][][][]
-                                    
- 
+
 # Match U
 Match U is an app designed to enhance in-person connections by making it easy to compare people's likes and dislikes in order to prompt a fun conversation.
 

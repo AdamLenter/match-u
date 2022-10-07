@@ -5,4 +5,8 @@ class Item < ApplicationRecord
 
     validates :name, uniqueness: true
 
+    def category_name
+        self.category.name
+    end
+
 end
