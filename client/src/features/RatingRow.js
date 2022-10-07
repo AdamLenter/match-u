@@ -20,7 +20,7 @@ function RatingRow({ rating, ratingCanBeEdited, cellStyle }) {
 
     return (
         <tr>
-            <td style = {cellStyle}>{rating.item.category.name}</td>
+            <td style = {cellStyle}>{rating.item.category_name}</td>
             <td style = {cellStyle}>{rating.item.name}</td>
             <td style = {cellStyle} onMouseOver = {displayEditLink} onMouseOut = {displayItemRating}>
                 {displayRating ? rating.rating : <Link to = {link}>Edit</Link>}

@@ -46,6 +46,7 @@ function Home({ userInfo, setUserInfo }) {
           }
       })
     }
+    
   if(!userInfo['username']) {
     return (
       <div>
