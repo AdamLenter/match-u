@@ -23,7 +23,7 @@ function MatchComparisonTable({ matchFirstName, matches, cellStyle, differenceFi
                     {matches.map((match) => (
                         <tr key = {match.myRating.item.id}>
                             <td style = {cellStyle}>{match.myRating.item.name}</td>
-                            <td style = {cellStyle}>{match.myRating.item.category.name}</td>
+                            <td style = {cellStyle}>{match.myRating.item.category_name}</td>
                             <td style = {cellStyle}>{match.myRating.rating}</td>
                             <td style = {cellStyle}>{match.matchRating.rating}</td>
                             {differenceFieldPresent ? <td style = {cellStyle}>{match.myRating.rating - match.matchRating.rating}</td> : null}
