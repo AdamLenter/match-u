@@ -37,7 +37,7 @@ function ReceiveMatchForm({ userInfo, setMatchSuccessful }) {
                     }
                     else if(returnedMatch.recipient_contact_id) {
                         //There is a recipient contact id. therefore, the code has been claimed.
-                        setErrorMessage("The code has expired. Please try again.");
+                        setErrorMessage("The match code you provided has already been claimed. Please try again.");
                         setEnteredMatchCode("");
                     }
                     else {
