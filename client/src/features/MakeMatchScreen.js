@@ -29,7 +29,7 @@ function MakeMatchScreen({ userInfo }) {
         return result;
     }
     
-    if(!buttonPhraseIndex && buttonPhrases.length > 0) {
+    if(buttonPhrases.length > 0 && !buttonPhraseIndex) {
         setButtonPhraseIndex(Math.floor(Math.random()*buttonPhrases.length));
     }
 
