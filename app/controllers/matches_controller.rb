@@ -8,7 +8,7 @@ class MatchesController < ApplicationController
     def create
         match = Match.create(match_params)
         if(match)
-            render json: match
+            render json: match, status: :created
         else
             render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
         end
