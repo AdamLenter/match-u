@@ -51,15 +51,10 @@ function MakeMatchScreen({ userInfo }) {
             if (response.ok) {
                 (response.json())
                 .then((matchInfo)=> {
-                    if(matchInfo.id) {
-                        setMatchCode(matchInfo.match_code);
-                        dispatch(addMatch(matchInfo));
+                    setMatchCode(matchInfo.match_code);
+                    dispatch(addMatch(matchInfo));
                     }
-                    else {
-                        console.log("Here");
-                    }
-                })
-                
+                )
             }
         else {
             generateMatchCode();
