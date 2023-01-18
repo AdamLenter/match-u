@@ -6,7 +6,7 @@ import { addMatch } from './matches/matchesSlice';
 
 function MakeMatchScreen({ userInfo }) {
     const [matchCode, setMatchCode] = useState("");
-    const [buttonTerm, setButtonTerm] = useState();
+    const [buttonPhraseIndex, setButtonPhraseIndex] = useState();
    
     const dispatch = useDispatch();
 
@@ -29,8 +29,8 @@ function MakeMatchScreen({ userInfo }) {
         return result;
     }
     
-    if(!buttonTerm && buttonPhrases.length > 0) {
-        setButtonTerm(Math.floor(Math.random()*buttonPhrases.length));
+    if(!buttonPhraseIndex && buttonPhrases.length > 0) {
+        setButtonPhraseIndex(Math.floor(Math.random()*buttonPhrases.length));
     }
 
     function generateMatchCode() {
@@ -72,7 +72,7 @@ function MakeMatchScreen({ userInfo }) {
             <div>
                 <h1>Make a Match</h1>
                 <br />
-                <button onClick = {generateMatchCode}>{buttonPhrases[buttonTerm]}</button>
+                <button onClick = {generateMatchCode}>{buttonPhrases[buttonPhraseIndex]}</button>
             </div>
         )
     }
